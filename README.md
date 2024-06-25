@@ -5,17 +5,12 @@
 yarn install
 ```
 
-### run this command to start the app
+### run this command to start the project
 ```
-yarn serve
+yarn dev
 ```
 
-### run this command to build the app
+### run this command to build the project
 ```
 yarn build
-```
-
-### run this command to lint the app
-```
-yarn lint
 ```
