@@ -1,16 +1,22 @@
+
+
 <template>
   <div class="home">
     <h1>Welcome to Our Site</h1>
     <router-link to="/login" class="button">Login</router-link>
-
     <router-link to="/signup" class="button">SignUp</router-link>
 
   </div>
 </template>
 
 <script>
+
+
+
 export default {
-  name: 'homepage'
+
+  name: 'homepage',
+
 }
 </script>
 

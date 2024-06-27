@@ -1,64 +1,125 @@
 <template>
-  <div class="login-container">
-    <h1>Login</h1>
-    <form @submit.prevent="handleLogin">
-      <input v-model="email" type="email" placeholder="Email" required>
-      <input v-model="password" type="password" placeholder="Password" required>
-      <button type="submit" class="button">Login</button>
-    </form>
+  <div class="login-page">
+    <div class="login-card">
+      <h1 class="header-color">Welcome to Our Dating App!</h1>
+      <form @submit.prevent="handleLogin" class="login-form">
+
+        <v-form @submit.prevent="handleLogin">
+          <v-text-field
+              bg-color="white"
+              v-model="username"
+              label="Username"
+              required
+              class="login-form"
+          ></v-text-field>
+<!--          <v-btn class="login-button" type="submit" block>Submit</v-btn>-->
+        </v-form>
+
+<!--        <input v-model="username" type="text" placeholder="Username" required>-->
+<!--        <input v-model="password" type="password" placeholder="Password" required>-->
+<!--        <button type="submit" class="login-button">Login</button>-->
+
+        <v-form @submit.prevent="handleLogin">
+          <v-text-field
+              bg-color="white"
+              v-model="password"
+              label="Password"
+              type="password"
+              required
+              class="login-form"
+          ></v-text-field>
+          <!--          <v-btn class="login-button" type="submit" block>Submit</v-btn>-->
+        </v-form>
+        <v-btn
+            type="submit"
+            height="50"
+            min-width="160"
+            class="login-button"
+        >
+          Login
+        </v-btn>
+
+      </form>
+    </div>
   </div>
 </template>
-
 
 <script>
 import { useRouter } from 'vue-router';
 
+
 export default {
   name: 'Login',
   setup() {
-    const router = useRouter();
-    const email = ref('');
+    const username = ref('');
     const password = ref('');
+    const router = useRouter();
 
     const handleLogin = () => {
-      console.log(`Login attempt with email: ${email.value} and password: ${password.value}`);
-      router.push('/matching'); // make sure the path is correct as per your route settings
+      console.log(`Login attempt with email: ${password.value} and password: ${username.value}`);
+      // Add your routing or authentication logic here
+      router.push('/matching');
     };
 
-    return {
-      email,
-      password,
-      handleLogin,
-    };
+    return { username, password, handleLogin };
   }
 }
 </script>
 
+
 <style scoped>
-.login-container {
-  max-width: 300px;
-  margin: auto;
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #F3EDE9; /* Example background color */
+}
+
+.login-card {
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #F4DA7E;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 60%;
 }
 
-input[type="email"], input[type="password"] {
+.login-form {
+  display: flex;
+  flex-direction: column; /* Stacks the children (input and button) vertically */
   width: 100%;
+}
+
+input[type="text"], input[type="password"] {
+  margin-bottom: 10px; /* Adds space between the inputs and the button */
   padding: 10px;
-  margin: 10px 0;
-  display: inline-block;
+  color: #680037;
   border: 1px solid #ccc;
-  box-sizing: border-box;
+  border-radius: 4px;
+  width: 100%; /* Ensures inputs take full width of the form */
 }
 
-button {
-  background-color: #FF0000FF;
+.login-button {
+  background-color: #C35A5A; /* Red color for the button */
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
   border: none;
+  padding: 12px;
   cursor: pointer;
-  width: 100%;
+  border-radius: 4px;
+}
+
+
+
+.login-button:hover {
+  background-color: #CC537F; /* Darker shade of red on hover */
+}
+
+.header-color {
+  color: #CC537F; /* Custom color for the header */
 }
 </style>
-
