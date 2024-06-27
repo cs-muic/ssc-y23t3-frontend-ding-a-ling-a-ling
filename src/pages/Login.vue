@@ -69,19 +69,21 @@ export default {
 
 <style scoped>
 
+
+
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #F3EDE9; /* Example background color */
+  background-color: #f8d2a9; /* Example background color */
 }
 
 .login-card {
-  padding: 20px;
-  background-color: #F4DA7E;
+  padding: 30px;
+  background-color: #c35a5a;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 350px;
   display: flex;
   flex-direction: column;
@@ -97,7 +99,7 @@ export default {
 
 input[type="text"], input[type="password"] {
   margin-bottom: 10px; /* Adds space between the inputs and the button */
-  padding: 10px;
+  padding: 15px;
   color: #680037;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -105,7 +107,7 @@ input[type="text"], input[type="password"] {
 }
 
 .login-button {
-  background-color: #C35A5A; /* Red color for the button */
+  background-color: #810046; /* Red color for the button */
   color: white;
   border: none;
   padding: 12px;
@@ -113,13 +115,13 @@ input[type="text"], input[type="password"] {
   border-radius: 4px;
 }
 
-
-
 .login-button:hover {
-  background-color: #CC537F; /* Darker shade of red on hover */
+  background-color: #cc537f; /* Darker shade of red on hover */
 }
 
 .header-color {
-  color: #CC537F; /* Custom color for the header */
+  color: #ffffff; /* Custom color for the header */
+  margin-bottom: 30px;
+
 }
 </style>
