@@ -53,24 +53,6 @@ export default {
 
 <style scoped>
 
-::v-deep .v-select-menu {
-  background-color: #000000; /* Black background for dropdown */
-}
-
-::v-deep .v-select-list {
-  color: white; /* White text for dropdown items */
-}
-
-::v-deep .v-input__control .v-input__slot {
-  background-color: #ffffff; /* Background of select input */
-  border-color: #000000; /* Border color */
-}
-
-::v-deep .v-input__append-inner {
-  color: #000000; /* Color of dropdown icon */
-}
-
-
 .options-card {
   width: 33%; /* Adjust width as per your design needs */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
