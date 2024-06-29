@@ -2,9 +2,12 @@
   <div class="login-page">
     <div class="login-card">
       <h1 class="header-color">Welcome to Our Dating App!</h1>
-      <form @submit.prevent="handleLogin" class="login-form">
+      <form @submit.prevent="validLogin" class="login-form">
 
-        <v-form @submit.prevent="handleLogin">
+        <v-form @submit.prevent="validLogin">
+<!--          if the user doesnt have a valid login then
+the user cannot come into the website-->
+
           <v-text-field
               bg-color="white"
               v-model="username"
@@ -19,7 +22,7 @@
 <!--        <input v-model="password" type="password" placeholder="Password" required>-->
 <!--        <button type="submit" class="login-button">Login</button>-->
 
-        <v-form @submit.prevent="handleLogin">
+        <v-form @submit.prevent="validLogin">
           <v-text-field
               bg-color="white"
               v-model="password"
@@ -47,23 +50,63 @@
 <script>
 import { useRouter } from 'vue-router';
 
+import UserService from '@/router/GetService';
 
 export default {
   name: 'Login',
-  setup() {
-    const username = ref('');
-    const password = ref('');
-    const router = useRouter();
 
-    const handleLogin = () => {
-      console.log(`Login attempt with email: ${password.value} and password: ${username.value}`);
-      // Add your routing or authentication logic here
-      router.push('/matching');
+  data() {
+    return {
+      username: '',
+      password: '',
     };
+  },
 
-    return { username, password, handleLogin };
+  methods: {
+
+    validLogin() {
+      UserService.getUser(thqis.username, this.password)
+          .then((response) => {
+            console.log(response);
+            if (response.data) {
+              this.$router.push('/matching');
+            } else {
+              console.log('Invalid login');
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      //
+      const handleLogin = () => {
+        console.log(`Login attempt with email: ${password.value} and password: ${username.value}`);
+        // Add your routing or authentication logic here
+        // router.push('/matching');
+      };
+      //
+      return {username, password, validLogin};
+    }
   }
+
+
+  // methods: {
+  //   validLogin() {
+  //     UserService.getUser(this.username, this.password)
+  //         .then((response) => {
+  //           console.log(response);
+  //           if (response.data) {
+  //             this.$router.push('/matching');
+  //           } else {
+  //             console.log('Invalid login');
+  //           }
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //   }
+  // }
 }
+
 </script>
 
 
