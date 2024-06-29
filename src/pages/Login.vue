@@ -3,26 +3,14 @@
     <div class="login-card">
       <h1 class="header-color">Welcome to Our Dating App!</h1>
       <form @submit.prevent="validLogin" class="login-form">
-
         <v-form @submit.prevent="validLogin">
-<!--          if the user doesnt have a valid login then
-the user cannot come into the website-->
-
           <v-text-field
               bg-color="white"
-              v-model="username"
+              v-model="profile"
               label="Username"
               required
               class="login-form"
           ></v-text-field>
-<!--          <v-btn class="login-button" type="submit" block>Submit</v-btn>-->
-        </v-form>
-
-<!--        <input v-model="username" type="text" placeholder="Username" required>-->
-<!--        <input v-model="password" type="password" placeholder="Password" required>-->
-<!--        <button type="submit" class="login-button">Login</button>-->
-
-        <v-form @submit.prevent="validLogin">
           <v-text-field
               bg-color="white"
               v-model="password"
@@ -31,7 +19,6 @@ the user cannot come into the website-->
               required
               class="login-form"
           ></v-text-field>
-          <!--          <v-btn class="login-button" type="submit" block>Submit</v-btn>-->
         </v-form>
         <v-btn
             type="submit"
@@ -41,7 +28,6 @@ the user cannot come into the website-->
         >
           Login
         </v-btn>
-
       </form>
     </div>
   </div>
@@ -57,19 +43,21 @@ export default {
 
   data() {
     return {
-      username: '',
+      profile: '',
       password: '',
+      router: useRouter(),
     };
   },
 
   methods: {
 
     validLogin() {
-      UserService.getUser(thqis.username, this.password)
+      // get profile because we want user to input their username and password
+      UserService.getProfile(this.profile, this.password)
           .then((response) => {
             console.log(response);
             if (response.data) {
-              this.$router.push('/matching');
+              this.router.push('/matching');
             } else {
               console.log('Invalid login');
             }
@@ -77,34 +65,8 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      //
-      const handleLogin = () => {
-        console.log(`Login attempt with email: ${password.value} and password: ${username.value}`);
-        // Add your routing or authentication logic here
-        // router.push('/matching');
-      };
-      //
-      return {username, password, validLogin};
     }
   }
-
-
-  // methods: {
-  //   validLogin() {
-  //     UserService.getUser(this.username, this.password)
-  //         .then((response) => {
-  //           console.log(response);
-  //           if (response.data) {
-  //             this.$router.push('/matching');
-  //           } else {
-  //             console.log('Invalid login');
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //   }
-  // }
 }
 
 </script>
@@ -112,14 +74,12 @@ export default {
 
 <style scoped>
 
-
-
 .login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f8d2a9; /* Example background color */
+  background-color: #f8d2a9;
 }
 
 .login-card {
@@ -136,21 +96,21 @@ export default {
 
 .login-form {
   display: flex;
-  flex-direction: column; /* Stacks the children (input and button) vertically */
+  flex-direction: column;
   width: 100%;
 }
 
 input[type="text"], input[type="password"] {
-  margin-bottom: 10px; /* Adds space between the inputs and the button */
+  margin-bottom: 10px;
   padding: 15px;
   color: #680037;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 100%; /* Ensures inputs take full width of the form */
+  width: 100%;
 }
 
 .login-button {
-  background-color: #810046; /* Red color for the button */
+  background-color: #810046;
   color: white;
   border: none;
   padding: 12px;
@@ -159,11 +119,11 @@ input[type="text"], input[type="password"] {
 }
 
 .login-button:hover {
-  background-color: #cc537f; /* Darker shade of red on hover */
+  background-color: #cc537f;
 }
 
 .header-color {
-  color: #ffffff; /* Custom color for the header */
+  color: #ffffff;
   margin-bottom: 30px;
 
 }
