@@ -40,7 +40,7 @@
         <input class="box" v-model="user.contact" type="text" placeholder="Contact Information">
 
         <!-- Biography -->
-        <input class="box" v-model="user.biography" placeholder="Biography"></input>
+        <input class="box" v-model="user.biography" placeholder="Biography">
 
         <!-- Preferences -->
 <!--        <label class="box" for="preferences">Preferences:</label>-->
