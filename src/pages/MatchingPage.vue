@@ -1,17 +1,46 @@
 <template>
-  <div class="matching">
-    <h1>Welcome to the Matching Page</h1>
-    <router-link to="/edit-profile" class="button">Edit Profile</router-link>
-  </div>
-
+  <section class="container">
+    <div class="matching">
+      <h1>Welcome to the Matching Page</h1>
+      <router-link to="/edit-profile" class="button">Edit Profile</router-link>
+    </div>
+    <v-window
+        v-model="onboarding"
+        reverse
+        show-arrows
+    >
+      <v-window-item
+          v-for="n in length"
+          :key="`card-${n}`"
+      >
+        <v-card
+            class="d-flex align-center justify-center ma-2"
+            elevation="2"
+            height="200"
+        >
+          <h1
+              class="text-h2"
+          >
+            Slide {{ n }}
+          </h1>
+        </v-card>
+      </v-window-item>
+    </v-window>
+  </section>
 
 </template>
 
+<script setup>
+import { ref } from 'vue'
 
+const length = ref(3)
+const onboarding = ref(0)
+</script>
 
 
 <script>
 import { useRouter } from 'vue-router';
+
 
 export default {
   name: 'MatchingPage',
@@ -23,9 +52,15 @@ export default {
     }
 
     return { goToEditProfile };
-  }
+  },
+  data: () => ({
+    length: 3,
+    onboarding: 0,
+  })
 }
 </script>
+
+
 
 
 <style scoped>
