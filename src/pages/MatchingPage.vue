@@ -1,26 +1,23 @@
 <template>
   <v-card class="mx-auto" width="1000">
-    <v-window
-        v-model="onboarding"
-        reverse
-        show-arrows
-    >
-      <v-window-item
-          v-for="n in length"
-          :key="`card-${n}`"
-      >
-        <v-img
-            color="surface-variant"
-            height="500"
-            src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
-            cover
-        >
-        </v-img>
+    <v-carousel>
+      <v-carousel-item
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+          cover
+      ></v-carousel-item>
 
-      </v-window-item>
-    </v-window>
+      <v-carousel-item
+          src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+          cover
+      ></v-carousel-item>
+
+      <v-carousel-item
+          src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+          cover
+      ></v-carousel-item>
+    </v-carousel>
   </v-card>
-  <v-row class="justify-end">
+  <v-row class="d-flex">
     <v-card-text>
       <div class="matching">
         <h1>Welcome to the Matching Page</h1>
@@ -60,7 +57,19 @@ export default {
   data: () => ({
     length: 3,
     onboarding: 0,
-  })
+  }),
+  methods: {
+    next () {
+      this.onboarding = this.onboarding + 1 > this.length
+          ? 1
+          : this.onboarding + 1
+    },
+    prev () {
+      this.onboarding = this.onboarding - 1 <= 0
+          ? this.length
+          : this.onboarding - 1
+    },
+  },
 }
 </script>
 
