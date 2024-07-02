@@ -1,9 +1,5 @@
 <template>
-  <section class="container">
-    <div class="matching">
-      <h1>Welcome to the Matching Page</h1>
-      <router-link to="/edit-profile" class="button">Edit Profile</router-link>
-    </div>
+  <v-card class="mx-auto" width="1000">
     <v-window
         v-model="onboarding"
         reverse
@@ -13,29 +9,37 @@
           v-for="n in length"
           :key="`card-${n}`"
       >
-        <v-card
-            class="d-flex align-center justify-center ma-2"
-            elevation="2"
-            height="200"
+        <v-img
+            color="surface-variant"
+            height="500"
+            src="https://cdn.vuetifyjs.com/docs/images/cards/purple-flowers.jpg"
+            cover
         >
-          <h1
-              class="text-h2"
-          >
-            Slide {{ n }}
-          </h1>
-        </v-card>
+        </v-img>
+
       </v-window-item>
     </v-window>
-  </section>
-
+  </v-card>
+  <v-row class="justify-end">
+    <v-card-text>
+      <div class="matching">
+        <h1>Welcome to the Matching Page</h1>
+        <router-link to="/edit-profile" class="button">Edit Profile</router-link>
+      </div>
+    </v-card-text>
+    <v-btn
+        class="mx-2"
+        color="pink"
+        size="small"
+        dark
+        fab
+    >
+      <v-icon dark>
+        mdi-heart
+      </v-icon>
+    </v-btn>
+  </v-row>
 </template>
-
-<script setup>
-import { ref } from 'vue'
-
-const length = ref(3)
-const onboarding = ref(0)
-</script>
 
 
 <script>
