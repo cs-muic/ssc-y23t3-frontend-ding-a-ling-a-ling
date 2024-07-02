@@ -1,140 +1,266 @@
 <template>
-  <div class="app-container">
-  <v-card >
   <div class="edit-profile">
-    <h1>Edit Profile</h1>
-      <v-form @submit.prevent="handleUpdateProfile">
-        <!-- Username -->
-        <input class="box" v-model="user.username" type="text" placeholder="Username" required>
+    <h2>Edit your Profile</h2>
+    <div class="profile-form">
+      <div class="photo-section">
+        <img src="../../public/logo.png" alt="Profile Photo" class="profile-photo" />
+        <button class="changed" @click="changePhoto">Change Photo</button>
+      </div>
+      <div class="tabs">
+        <button :class="{ active: activeTab === 'personal' }" @click="activeTab = 'personal'">Personal</button>
+        <button :class="{ active: activeTab === 'datingProfile' }" @click="activeTab = 'datingProfile'">Dating Profile</button>
+        <button :class="{ active: activeTab === 'datingPreferences' }" @click="activeTab = 'datingPreferences'">Dating Preferences</button>
+      </div>
+      <form @submit.prevent="saveProfile">
+        <div v-if="activeTab === 'personal'">
+          <label>
+            Display Name:
+            <input type="text" v-model="user.displayName" />
+          </label>
+          <label>
+            Phone Number:
+            <input type="text" v-model="user.phoneNumber" />
+          </label>
+          <label>
+            Email:
+            <input type="email" v-model="user.email" />
+          </label>
+        </div>
+        <div v-if="activeTab === 'datingProfile'">
+          <label>
+            Biography:
+            <input type="text" v-model="user.biography" />
+          </label>
+          <label>
+            Contact:
+            <input type="text" v-model="user.contact" />
+          </label>
+        </div>
+        <div v-if="activeTab === 'datingPreferences'">
+          <label>
+            Preferences:
+            <div class="checkbox-group">
+              <div class="checkbox-container">
+                <input type="checkbox" id="idk" value="idk" v-model="selectedDislikes" @change="updatePreferences('preferences')" />
+                <label for="idk">IDK</label>
+              </div>
 
-        <!-- Email -->
-        <input class="box" v-model="user.email" type="text" placeholder="Email" required>
+              <div class="checkbox-container">
+                <input type="checkbox" id="idk2" value="idk2" v-model="selectedDislikes" @change="updatePreferences('preferences')" />
+                <label for="idk2">IDK2</label>
+              </div>
 
-        <!-- First Name -->
-        <input class="box" v-model="user.firstname" type="text" placeholder="First Name" required>
+            </div>
 
-        <!-- Last Name -->
-        <input class="box"  v-model="user.lastname" type="text" placeholder="Last Name" required>
+          </label>
+          <label>
+            Dislikes:
 
-        <!-- Address -->
-        <input class="box"  v-model="user.address" type="text" placeholder="Address">
+            <div class="checkbox-group">
+              <div class="checkbox-container">
+                <input type="checkbox" id="smoking" value="Smoking" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
+                <label for="smoking">Smoking</label>
+              </div>
 
-        <!-- Password (Be cautious about how you handle passwords) -->
-        <input class="box"  v-model="user.password" type="password" placeholder="Password" required>
+              <div class="checkbox-container">
+                <input type="checkbox" id="loudNoise" value="Loud Noise" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
+                <label for="loudNoise">Loud Noise</label>
+              </div>
 
-        <!-- Phone Number -->
-        <input class="box"  v-model="user.phoneNumber" type="tel" placeholder="Phone Number">
+              <div class="checkbox-container">
+                <input type="checkbox" id="crowds" value="Crowds" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
+                <label for="crowds">Crowds</label>
+              </div>
 
-        <!-- Age -->
-        <input class="box"  v-model.number="user.age" type="number" placeholder="Age">
+              <div class="checkbox-container">
+                <input type="checkbox" id="fastFood" value="Fast Food" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
+                <label for="fastFood">Fast Food</label>
+              </div>
+            </div>
 
-        <!-- Height in CM -->
-        <input class="box"  v-model.number="user.height" type="number" placeholder="Height in CM">
+          </label>
 
-        <!-- Display Name -->
-        <input class="box"  v-model="user.displayName" type="text" placeholder="Display Name">
-
-        <!-- Profile Picture URL -->
-        <input class="box" v-model="user.profilePicture" type="text" placeholder="Profile Picture URL">
-
-        <input class="box" v-model="user.contact" type="text" placeholder="Contact Information">
-
-        <!-- Biography -->
-        <input class="box" v-model="user.biography" placeholder="Biography">
-
-        <!-- Preferences -->
-<!--        <label class="box" for="preferences">Preferences:</label>-->
-        <input class="box" type="text" v-model="user.preferences" placeholder="Preferences" >
-
-        <!-- Dislikes -->
-<!--        <label for="dislikes">Dislikes:</label>-->
-        <input class="box" type="text" v-model="user.dislikes" placeholder="Dislikes">
-
-        <!-- Submit Button -->
-        <button class="button" type="submit">Update Profile</button>
-
-      </v-form>
-  <div v-if="user">
-    <p>{{reply}}</p>
-    <!-- Display other user details -->
+        </div>
+        <div class="form-actions">
+          <button type="button" @click="cancelEdit">Cancel</button>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </div>
   </div>
 
-  </div>
-  </v-card>
-  </div>
 </template>
 
-
-<style scoped>
-.edit-profile {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  background-color: #EDE5E0;
-  border-radius: 15px;
-}
-
-h1 {
-  color: #dc6565;
-}
-.box {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  color: #000000;
-  box-sizing: border-box;
-  text-decoration-color: #000000;
-  border:3px solid rgb(220, 101, 101);
-  border-radius:5px
-}
-
-.button {
-  padding: 10px 20px;
-  margin: 10px;
-  background-color: #FF0000FF;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  text-align: center;
-}
-
-</style>
-
 <script>
-  import UserService from '@/router/GetService';
-
 export default {
   data() {
     return {
+      photo: '', // Replace with actual photo path or URL
+      activeTab: 'personal',
       user: {
-        username: '',
         email: '',
-        firstname: '',
-        lastname: '',
         address: '',
-        password: '',
         phoneNumber: '',
-        age: 0,
-        height: 0.0,
+        age: '',
+        height: '',
         displayName: '',
         profilePicture: '',
-        biography: '',
-        preferences: '',
-        dislikes: '',
         contact: '',
+        biography: '',
+        preferences: new Set(),
+        dislikes: new Set()
       },
-      reply: null
+      selectedDislikes: [],
+      selectedPreferences: []
+
     };
   },
   methods: {
-    handleUpdateProfile() {
-      UserService.updateUser(this.user).then(response => {
-        this.reply = response.data;
-      }).catch(error => {
-        console.error('Error fetching user:', error);
-      });
+    changePhoto() {
+      // Handle photo change logic
+    },
+    saveProfile() {
+      // Handle profile save logic
+      if (this.activeTab === 'personal') {
+        this.activeTab = 'datingProfile';
+      } else if (this.activeTab === 'datingProfile') {
+        this.activeTab = 'datingPreferences';
+      } else {
+        // Assuming "dating preferences" is the last tab, you can add any final save logic here
+        alert('Profile saved successfully!');
+      }
+    },
+    updatePreferences(type) {
+      if (type === 'dislikes') {
+        this.user.dislikes = new Set(this.selectedDislikes);
+      }
+      else {
+        this.user.preferences = new Set(this.selectedDislikes);
+      }
+    },
+    cancelEdit() {
+      // Handle cancel logic
     }
   }
 };
 
 </script>
+
+<style scoped>
+
+.edit-profile {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #dc6565;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-photo {
+  width: 25%;
+  height: 25%;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.changed {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(177, 38, 38);
+  color: #fff;
+  margin-right: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  color: #dc6565;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #f1f1f1;
+  margin-right: 5px;
+  border-radius: 10px;
+
+}
+
+.tabs button.active {
+  background-color: #efa0b8;
+  color: #fbfbfb;
+
+}
+
+.checkbox-group {
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.form-actions button[type="button"] {
+  background-color: #817f7f;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+
+.form-actions button[type="submit"] {
+  background-color: #ff0404;
+  color: #fff;
+}
+</style>
