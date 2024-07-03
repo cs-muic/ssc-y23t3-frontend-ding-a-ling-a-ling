@@ -1,95 +1,160 @@
 <template>
-  <div class="edit-profile">
-    <h2>Edit your Profile</h2>
-    <div class="profile-form">
-      <div class="photo-section">
-        <img src="../../public/logo.png" alt="Profile Photo" class="profile-photo" />
-        <button class="changed" @click="changePhoto">Change Photo</button>
-      </div>
-      <div class="tabs">
-        <button :class="{ active: activeTab === 'personal' }" @click="activeTab = 'personal'">Personal</button>
-        <button :class="{ active: activeTab === 'datingProfile' }" @click="activeTab = 'datingProfile'">Dating Profile</button>
-        <button :class="{ active: activeTab === 'datingPreferences' }" @click="activeTab = 'datingPreferences'">Dating Preferences</button>
-      </div>
-      <form @submit.prevent="saveProfile">
-        <div v-if="activeTab === 'personal'">
-          <label>
-            Display Name:
-            <input type="text" v-model="user.displayName" />
-          </label>
-          <label>
-            Phone Number:
-            <input type="text" v-model="user.phoneNumber" />
-          </label>
-          <label>
-            Email:
-            <input type="email" v-model="user.email" />
-          </label>
-        </div>
-        <div v-if="activeTab === 'datingProfile'">
-          <label>
-            Biography:
-            <input type="text" v-model="user.biography" />
-          </label>
-          <label>
-            Contact:
-            <input type="text" v-model="user.contact" />
-          </label>
-        </div>
-        <div v-if="activeTab === 'datingPreferences'">
-          <label>
-            Preferences:
-            <div class="checkbox-group">
-              <div class="checkbox-container">
-                <input type="checkbox" id="idk" value="idk" v-model="selectedDislikes" @change="updatePreferences('preferences')" />
-                <label for="idk">IDK</label>
-              </div>
+  <v-col class="mx-auto" cols="12" sm="8" md="8" lg="8" xl="8"
+  >
+    <v-card
+        color="red-lighten-1"
+        variant="flat"
+        class="mb-2"
+    >
+      <v-card-title class="text-h4 mt-3">Edit Profile</v-card-title>
+      <div class="mb-3"></div>
+    </v-card>
 
-              <div class="checkbox-container">
-                <input type="checkbox" id="idk2" value="idk2" v-model="selectedDislikes" @change="updatePreferences('preferences')" />
-                <label for="idk2">IDK2</label>
-              </div>
+    <form @submit.prevent="editProfile">
+      <v-card
+          color="red-darken-1"
+          variant="outlined"
+          class="mb-2"
+      >
+        <v-divider class="mx-4 mb-1"></v-divider>
 
+        <v-card-item>
+          <div class="text-h6">Profile Details</div>
+        </v-card-item>
+        <v-card-item>
+          <v-text-field v-model="user.firstName" type="text" placeholder="First Name" required></v-text-field>
+        </v-card-item>
+        <v-card-item>
+          <v-text-field v-model="user.lastName" type="text" placeholder="Last Name" required></v-text-field>
+        </v-card-item>
+
+        <v-card-item class="my-5 ">
+          <div class="mx-auto d-flex flex-row">
+            <div class="mx-5">
+              <v-avatar color="red-lighten-2" size="100">
+                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>
+              </v-avatar>
             </div>
+            <v-col class="flex-0-1">
+              <v-file-input
+                  v-model="user.profilePicture"
+                  accept="image/png, image/jpeg, image/bmp"
+                  label="Profile Picture"
+                  placeholder="Upload Profile Picture"
+                  prepend-icon="mdi-camera"
+              ></v-file-input>
+            </v-col>
+          </div>
+        </v-card-item>
+        <v-card-item>
+          <v-text-field v-model="user.displayName" type="text" placeholder="Display Name" required></v-text-field>
+        </v-card-item>
 
-          </label>
-          <label>
-            Dislikes:
+        <v-card-item>
+          <v-text-field v-model="user.phoneNumber" type="tel" placeholder="Phone Number" required></v-text-field>
+        </v-card-item>
 
-            <div class="checkbox-group">
-              <div class="checkbox-container">
-                <input type="checkbox" id="smoking" value="Smoking" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
-                <label for="smoking">Smoking</label>
-              </div>
+        <v-card-item>
+          <v-text-field v-model="user.height" type="number" placeholder="Height (cm)" required></v-text-field>
+        </v-card-item>
 
-              <div class="checkbox-container">
-                <input type="checkbox" id="loudNoise" value="Loud Noise" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
-                <label for="loudNoise">Loud Noise</label>
-              </div>
+        <v-card-item>
+          <v-text-field v-model="user.height" type="text" placeholder="Address" required></v-text-field>
+        </v-card-item>
 
-              <div class="checkbox-container">
-                <input type="checkbox" id="crowds" value="Crowds" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
-                <label for="crowds">Crowds</label>
-              </div>
+      </v-card>
 
-              <div class="checkbox-container">
-                <input type="checkbox" id="fastFood" value="Fast Food" v-model="selectedDislikes" @change="updatePreferences('dislikes')" />
-                <label for="fastFood">Fast Food</label>
-              </div>
-            </div>
 
-          </label>
+      <v-card
+          color="red-darken-1"
+          variant="outlined"
+          class="mb-2"
+      >
 
-        </div>
-        <div class="form-actions">
-          <button type="button" @click="cancelEdit">Cancel</button>
-          <button type="submit">Save</button>
-        </div>
-      </form>
-    </div>
-  </div>
+        <v-card-item>
+          <div class="text-h6">Account Details</div>
+        </v-card-item>
+        <v-card-item>
+          <v-text-field v-model="user.contact" type="text" placeholder="Contact Information" required></v-text-field>
+        </v-card-item>
+        <v-card-item>
+          <v-text-field v-model="user.biography" type="text" placeholder="Biography" required></v-text-field>
+        </v-card-item>
 
+      </v-card>
+
+      <v-card
+          color="red-lighten-1"
+          class="mb-2"
+          variant="elevated"
+      >
+        <v-card-title class="text-h4 mt-3">Gender Preferences</v-card-title>
+        <v-card-item required >
+            <v-container fluid mb-2>
+              <v-row mt-3>
+                <v-col
+                    cols="12"
+                    md="4"
+                    sm="4"
+                >
+                  <v-checkbox
+                      v-model="selectedPreferences"
+                      label="Male"
+                      value="Male"
+                      hide-details
+                  ></v-checkbox>
+                  <v-checkbox
+                      v-model="selectedPreferences"
+                      label="Female"
+                      value="Female"
+                  ></v-checkbox>
+                </v-col>
+              </v-row>
+            </v-container>
+        </v-card-item>
+
+        <v-card-title class="text-h4 mt-3">Dislikes</v-card-title>
+        <div class="mb-2"></div>
+        <v-card-item>
+          <v-card-item required >
+            <v-container fluid>
+              <v-row mt-3>
+                <v-col
+                    cols="12"
+                    md="4"
+                    sm="4"
+                >
+                  <v-checkbox
+                      v-model="selectedDislikes"
+                      label="Smoking"
+                      value="Smoking"
+                      hide-details
+                  ></v-checkbox>
+                  <v-checkbox
+                      v-model="selectedDislikes"
+                      label="Drinking"
+                      value="Drinking"
+                  ></v-checkbox>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-item>
+        </v-card-item>
+        <v-card-text class="text-md-subtitle-2">Powered by our patent pending love matching algorithm.</v-card-text>
+        <div class="mb-3"></div>
+      </v-card>
+
+      <v-card color="red-darken-1" variant="tonal">
+        <v-card-actions>
+          <v-btn size="large" class="d-block flex-fill">
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </form>
+  </v-col>
 </template>
+
 
 <script>
 export default {
@@ -111,156 +176,26 @@ export default {
         dislikes: new Set()
       },
       selectedDislikes: [],
-      selectedPreferences: []
+      selectedPreferences: [],
+
 
     };
   },
   methods: {
+    updatePrefAndDislikes() {
+      this.user.dislikes = new Set(this.selectedDislikes);
+      this.user.preferences = new Set(this.selectedDislikes);
+    },
+    editProfile() {
+      this.updatePrefAndDislikes();
+      // do smth
+      alert('Profile saved successfully!');
+    },
     changePhoto() {
       // Handle photo change logic
-    },
-    saveProfile() {
-      // Handle profile save logic
-      if (this.activeTab === 'personal') {
-        this.activeTab = 'datingProfile';
-      } else if (this.activeTab === 'datingProfile') {
-        this.activeTab = 'datingPreferences';
-      } else {
-        // Assuming "dating preferences" is the last tab, you can add any final save logic here
-        alert('Profile saved successfully!');
-      }
-    },
-    updatePreferences(type) {
-      if (type === 'dislikes') {
-        this.user.dislikes = new Set(this.selectedDislikes);
-      }
-      else {
-        this.user.preferences = new Set(this.selectedDislikes);
-      }
-    },
-    cancelEdit() {
-      // Handle cancel logic
     }
   }
 };
 
 </script>
 
-<style scoped>
-
-.edit-profile {
-  padding: 20px;
-  max-width: 600px;
-  margin: auto;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #dc6565;
-}
-
-.profile-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.photo-section {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.profile-photo {
-  width: 25%;
-  height: 25%;
-  border-radius: 50%;
-  margin-right: 20px;
-}
-
-.changed {
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  background-color: rgb(177, 38, 38);
-  color: #fff;
-  margin-right: 10px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.tabs {
-  display: flex;
-  margin-bottom: 20px;
-  color: #dc6565;
-}
-
-.tabs button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  background-color: #f1f1f1;
-  margin-right: 5px;
-  border-radius: 10px;
-
-}
-
-.tabs button.active {
-  background-color: #efa0b8;
-  color: #fbfbfb;
-
-}
-
-.checkbox-group {
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.checkbox-container {
-  display: flex;
-  align-items: center;
-}
-
-.checkbox-container input[type="checkbox"] {
-  margin-right: 10px;
-}
-
-
-form label {
-  display: block;
-  margin-bottom: 10px;
-}
-
-form input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.form-actions button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.form-actions button[type="button"] {
-  background-color: #817f7f;
-  margin-right: 10px;
-  border-radius: 10px;
-}
-
-.form-actions button[type="submit"] {
-  background-color: #ff0404;
-  color: #fff;
-}
-</style>
