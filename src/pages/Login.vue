@@ -62,7 +62,7 @@ export default {
         }
       } catch (error) {
         console.error('Login failed:', error.response ? error.response.data : error);
-        alert(`Login failed: ${error.response ? error.response.data.message : "Network or server error"}`);
+        alert(`Login failed: Invalid email or password.`);
       }
     };
 

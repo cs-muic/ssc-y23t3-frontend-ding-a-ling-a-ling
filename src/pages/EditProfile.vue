@@ -22,48 +22,74 @@
           <div class="text-h6">Profile Details</div>
         </v-card-item>
         <v-card-item>
-          <v-text-field v-model="user.firstName" type="text" placeholder="First Name" required></v-text-field>
+          <v-text-field v-model="firstName" type="text" placeholder="First Name"></v-text-field>
         </v-card-item>
         <v-card-item>
-          <v-text-field v-model="user.lastName" type="text" placeholder="Last Name" required></v-text-field>
+          <v-text-field v-model="lastName" type="text" placeholder="Last Name"></v-text-field>
         </v-card-item>
 
-        <v-card-item class="my-5 ">
-          <div class="mx-auto d-flex flex-row">
-            <div class="mx-5">
-              <v-avatar color="red-lighten-2" size="100">
-                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>
-              </v-avatar>
-            </div>
-            <v-col class="flex-0-1">
-              <v-file-input
-                  v-model="user.profilePicture"
-                  accept="image/png, image/jpeg, image/bmp"
-                  label="Profile Picture"
-                  placeholder="Upload Profile Picture"
-                  prepend-icon="mdi-camera"
-              ></v-file-input>
-            </v-col>
-          </div>
-        </v-card-item>
-        <v-card-item>
-          <v-text-field v-model="user.displayName" type="text" placeholder="Display Name" required></v-text-field>
-        </v-card-item>
+<!--        <v-card-item class="my-5 ">-->
+<!--          <div class="mx-auto d-flex flex-row">-->
+<!--            <div class="mx-5">-->
+<!--              <v-avatar color="red-lighten-2" size="100">-->
+<!--                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>-->
+<!--              </v-avatar>-->
+<!--            </div>-->
+<!--            <v-col class="flex-0-1">-->
+<!--              <v-file-input-->
+<!--                  v-model="profilePicture"-->
+<!--                  accept="image/png, image/jpeg, image/bmp"-->
+<!--                  label="Profile Picture"-->
+<!--                  placeholder="Upload Profile Picture"-->
+<!--                  prepend-icon="mdi-camera"-->
+<!--              ></v-file-input>-->
+<!--            </v-col>-->
+<!--          </div>-->
+<!--        </v-card-item>-->
 
         <v-card-item>
-          <v-text-field v-model="user.phoneNumber" type="tel" placeholder="Phone Number" required></v-text-field>
-        </v-card-item>
+        <v-text-field v-model="profilePicture" type="text" placeholder="Profile Picture"></v-text-field><v-card-item>
 
-        <v-card-item>
-          <v-text-field v-model="user.height" type="number" placeholder="Height (cm)" required></v-text-field>
+        </v-card-item>  <v-text-field v-model="displayName" type="text" placeholder="Display Name" ></v-text-field>
         </v-card-item>
 
         <v-card-item>
-          <v-text-field v-model="user.address" type="text" placeholder="Address" required></v-text-field>
+          <v-text-field v-model="phoneNumber" type="tel" placeholder="Phone Number" ></v-text-field>
+        </v-card-item>
+
+        <v-card-item>
+          <v-slider
+              v-model="age"
+              :max="100"
+              :step="1"
+              class="ma-4"
+              label="Age"
+              color="red-lighten-2"
+              hide-details
+          >
+            <template v-slot:append>
+              <v-text-field
+                  v-model="age"
+                  density=comfortable
+                  style="width: 80px"
+                  type="number"
+                  label="Age"
+                  variant="outlined"
+                  hide-details
+              ></v-text-field>
+            </template>
+          </v-slider>
+        </v-card-item>
+
+        <v-card-item>
+          <v-text-field v-model="height" type="number" placeholder="Height (cm)" ></v-text-field>
+        </v-card-item>
+
+        <v-card-item>
+          <v-text-field v-model="address" type="text" placeholder="Address" ></v-text-field>
         </v-card-item>
 
       </v-card>
-
 
       <v-card
           color="red-darken-1"
@@ -75,10 +101,10 @@
           <div class="text-h6">Account Details</div>
         </v-card-item>
         <v-card-item>
-          <v-text-field v-model="user.contact" type="text" placeholder="Contact Information" required></v-text-field>
+          <v-text-field v-model="contact" type="text" placeholder="Contact Information" ></v-text-field>
         </v-card-item>
         <v-card-item>
-          <v-text-field v-model="user.biography" type="text" placeholder="Biography" required></v-text-field>
+          <v-text-field v-model="biography" type="text" placeholder="Biography" ></v-text-field>
         </v-card-item>
 
       </v-card>
@@ -89,22 +115,22 @@
           variant="elevated"
       >
         <v-card-title class="text-h4 mt-3">Gender Preferences</v-card-title>
-        <v-card-item required >
+        <v-card-item >
             <v-container fluid mb-2>
-              <v-row mt-3>
+              <v-row mt-1>
                 <v-col
                     cols="12"
                     md="4"
                     sm="4"
                 >
                   <v-checkbox
-                      v-model="selectedPreferences"
+                      v-model="dislikes"
                       label="Male"
                       value="Male"
                       hide-details
                   ></v-checkbox>
                   <v-checkbox
-                      v-model="selectedDislikes"
+                      v-model="dislikes"
                       label="Female"
                       value="Female"
                   ></v-checkbox>
@@ -116,22 +142,22 @@
         <v-card-title class="text-h4 mt-3">Dislikes</v-card-title>
         <div class="mb-2"></div>
         <v-card-item>
-          <v-card-item required >
+          <v-card-item >
             <v-container fluid>
-              <v-row mt-3>
+              <v-row mt-1>
                 <v-col
                     cols="12"
                     md="4"
                     sm="4"
                 >
                   <v-checkbox
-                      v-model="selectedDislikes"
+                      v-model="dislikes"
                       label="Smoking"
                       value="Smoking"
                       hide-details
                   ></v-checkbox>
                   <v-checkbox
-                      v-model="selectedDislikes"
+                      v-model="dislikes"
                       label="Drinking"
                       value="Drinking"
                   ></v-checkbox>
@@ -141,89 +167,101 @@
           </v-card-item>
         </v-card-item>
         <v-card-text class="text-md-subtitle-2">Powered by our patent pending love matching algorithm.</v-card-text>
-        <div class="mb-3"></div>
+        <div class="mb-1"></div>
       </v-card>
 
-      <v-card color="red-darken-1" variant="tonal">
+
+      <v-card class="mb-3" color="red-darken-1" variant="tonal">
         <v-card-actions>
-          <v-btn size="large" class="d-block flex-fill">
+          <v-btn type="submit" size="large" class="d-block flex-fill">
             Save
           </v-btn>
         </v-card-actions>
       </v-card>
+      <v-card color="secondary" variant="tonal">
+        <v-card-actions>
+          <v-btn @click="cancel()" size="large" class="d-block flex-fill">
+            Cancel
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+
     </form>
   </v-col>
 </template>
 
 
 <script>
-import {useRouter} from "vue-router";
-import {ref} from "vue";
-import apiClient from "@/axiosConfig";
+import apiClient from '@/axiosConfig'; // Import the Axios configuration
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import router from "@/router";
 
 export default {
   name: 'EditProfile',
+  methods: {
+    router() {
+      return router
+    }
+  },
   setup() {
-    const user = ref({
-      firstName: '',
-      lastName: '',
-      email: '',
-      address: '',
-      phoneNumber: '',
-      age: '',
-      height: '',
-      displayName: '',
-      profilePicture: '',
-      contact: '',
-      biography: '',
-      preferences: new Set(),
-      dislikes: new Set()
-    });
-    const selectedDislikes = ref([]);
-    const selectedPreferences = ref([]);
+    const router = useRouter();
+    const firstName = ref('');
+    const lastName = ref('');
+    const address = ref('');
+    const phoneNumber = ref('');
+    const age = ref(null);
+    const height = ref(null);
+    const displayName = ref('');
+    const profilePicture = ref('');
+    const contact = ref('');
+    const biography = ref('');
+    const dislikes = ref([]);
+    const preferences = ref([]);
 
+    const editProfile = async () => {
+      try {
+        if (!localStorage.getItem('token') === null) {
+          alert('You must be logged in to edit your profile');
+        }
+        const response = await apiClient.post('user/update', {
+          token: localStorage.getItem('token'),
+          firstName: firstName.value,
+          lastName: lastName.value,
+          address: address.value,
+          phoneNumber: phoneNumber.value,
+          age: age.value,
+          height: height.value,
+          displayName: displayName.value,
+          profilePicture: profilePicture.value,
+          contact: contact.value,
+          biography: biography.value,
+          dislikes: dislikes.value,
+          preferences: preferences.value
+        });
+
+        console.log('Edit Profile response:', response.data); // Logging response data
+        // grabbing the token back from the server (which will be in local storage)
+        if (response.data) {
+          alert('Profile updated successfully');
+          await router.push('/matching'); // Redirect to matching page
+        } else {
+          console.error('Failed to update profile, no response');
+          alert('Failed to update profile, no token received');
+        }
+      } catch (error) {
+        console.error('Signup failed:', error.response ? error.response.data : error);
+        alert(`Signup failed: ${error.response ? error.response.data.message : "Network or server error"}`);
+      }
+    };
+
+    return { firstName, lastName, address, profilePicture,
+      phoneNumber, age, height, displayName, contact, biography,
+      dislikes, preferences, editProfile };
+  },
+  cancel() {
+    router.push('/matching');
   }
-}
-
-// export default {
-//   data() {
-//     return {
-//       photo: '', // Replace with actual photo path or URL
-//       activeTab: 'personal',
-//       user: {
-//         email: '',
-//         address: '',
-//         phoneNumber: '',
-//         age: '',
-//         height: '',
-//         displayName: '',
-//         profilePicture: '',
-//         contact: '',
-//         biography: '',
-//         preferences: new Set(),
-//         dislikes: new Set()
-//       },
-//       selectedDislikes: [],
-//       selectedPreferences: [],
-//
-//
-//     };
-//   },
-//   methods: {
-//     updatePrefAndDislikes() {
-//       this.user.dislikes = new Set(this.selectedDislikes);
-//       this.user.preferences = new Set(this.selectedDislikes);
-//     },
-//     editProfile() {
-//       this.updatePrefAndDislikes();
-//       // do smth
-//       alert('Profile saved successfully!');
-//     },
-//     changePhoto() {
-//       // Handle photo change logic
-//     }
-//   }
-// };
-
+};
 </script>
 
