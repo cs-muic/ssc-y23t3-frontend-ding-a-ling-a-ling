@@ -22,6 +22,11 @@ class UserService {
     getProfile(username) {
         return axios.get(`${API_BASE_URL}/profile/${username}`);
     }
+
+    loginUser(username, password) {
+        return axios.get(`${API_BASE_URL}/signin`, { params: { username: username, password: password } });
+    }
+
 }
 
 export default new UserService();
