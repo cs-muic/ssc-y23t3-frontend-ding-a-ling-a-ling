@@ -59,7 +59,7 @@
         </v-card-item>
 
         <v-card-item>
-          <v-text-field v-model="user.height" type="text" placeholder="Address" required></v-text-field>
+          <v-text-field v-model="user.address" type="text" placeholder="Address" required></v-text-field>
         </v-card-item>
 
       </v-card>
@@ -104,7 +104,7 @@
                       hide-details
                   ></v-checkbox>
                   <v-checkbox
-                      v-model="selectedPreferences"
+                      v-model="selectedDislikes"
                       label="Female"
                       value="Female"
                   ></v-checkbox>
@@ -157,45 +157,73 @@
 
 
 <script>
+import {useRouter} from "vue-router";
+import {ref} from "vue";
+import apiClient from "@/axiosConfig";
+
 export default {
-  data() {
-    return {
-      photo: '', // Replace with actual photo path or URL
-      activeTab: 'personal',
-      user: {
-        email: '',
-        address: '',
-        phoneNumber: '',
-        age: '',
-        height: '',
-        displayName: '',
-        profilePicture: '',
-        contact: '',
-        biography: '',
-        preferences: new Set(),
-        dislikes: new Set()
-      },
-      selectedDislikes: [],
-      selectedPreferences: [],
+  name: 'EditProfile',
+  setup() {
+    const user = ref({
+      firstName: '',
+      lastName: '',
+      email: '',
+      address: '',
+      phoneNumber: '',
+      age: '',
+      height: '',
+      displayName: '',
+      profilePicture: '',
+      contact: '',
+      biography: '',
+      preferences: new Set(),
+      dislikes: new Set()
+    });
+    const selectedDislikes = ref([]);
+    const selectedPreferences = ref([]);
 
-
-    };
-  },
-  methods: {
-    updatePrefAndDislikes() {
-      this.user.dislikes = new Set(this.selectedDislikes);
-      this.user.preferences = new Set(this.selectedDislikes);
-    },
-    editProfile() {
-      this.updatePrefAndDislikes();
-      // do smth
-      alert('Profile saved successfully!');
-    },
-    changePhoto() {
-      // Handle photo change logic
-    }
   }
-};
+}
+
+// export default {
+//   data() {
+//     return {
+//       photo: '', // Replace with actual photo path or URL
+//       activeTab: 'personal',
+//       user: {
+//         email: '',
+//         address: '',
+//         phoneNumber: '',
+//         age: '',
+//         height: '',
+//         displayName: '',
+//         profilePicture: '',
+//         contact: '',
+//         biography: '',
+//         preferences: new Set(),
+//         dislikes: new Set()
+//       },
+//       selectedDislikes: [],
+//       selectedPreferences: [],
+//
+//
+//     };
+//   },
+//   methods: {
+//     updatePrefAndDislikes() {
+//       this.user.dislikes = new Set(this.selectedDislikes);
+//       this.user.preferences = new Set(this.selectedDislikes);
+//     },
+//     editProfile() {
+//       this.updatePrefAndDislikes();
+//       // do smth
+//       alert('Profile saved successfully!');
+//     },
+//     changePhoto() {
+//       // Handle photo change logic
+//     }
+//   }
+// };
 
 </script>
 
