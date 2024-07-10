@@ -19,6 +19,7 @@ const router = createRouter({
     {path: '/', component: HomePage },
     {path: '/signin', component: Login},
     {path: '/signup', component: SignUp},
+    //{path: '/matching', component: MatchingPage},
     {path: '/matching/:id', component: ()=> import('@/pages/MatchingPage.vue')},
     {path: '/edit-profile', component: EditProfile}
   ],

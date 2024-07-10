@@ -6,11 +6,15 @@
     <h1>Welcome to the Matching Page</h1>
     <router-link to="/edit-profile" class="button">Edit Profile</router-link>
   </div>
-  <tbody>
-  <tr v-for="(user, index) in this.users" :key ="index">
-    <td>{{user.displayName}}}</td>
-  </tr>
-  </tbody>
+  <div class="profile" v-for="(user, index) in this.users" :key ="index"
+       @click="setProfile(index)"
+  >
+    <h2>{{user.displayName}}</h2>
+    <h2>{{user.biography}}</h2>
+  </div>
+  <Profile v-if="active" :profile="activeProfile" @close="closeProfile">
+
+  </Profile>
 
 </template>
 
@@ -19,47 +23,63 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import axios from 'axios'
 import apiClient from "@/axiosConfig";
 import router from "@/router";
 
+
 let i = -1;
 let user = "";
-
-const mockUserList = [
-  {
-    email: '',
-    address: '',
-    phoneNumber: '',
-    age: '18',
-    height: '178',
-    displayName: 'Flame Author',
-    profilePicture: '',
-    contact: '',
-    biography: '',
-    preferences: new Set(),
-    dislikes: new Set()
-  },
-  {
-    email: '',
-    address: '',
-    phoneNumber: '',
-    age: '36',
-    height: '162',
-    displayName: 'Sindy Clasue',
-    profilePicture: '',
-    contact: '',
-    biography: '',
-    preferences: new Set(),
-    dislikes: new Set()
-  }
-]
 
 export default {
   name: 'users',
   data(){
     return{
-      users: []
+      active: false,
+      activeProfile: {},
+      users: [
+        {
+          id: 1,
+          email: '',
+          address: '',
+          phoneNumber: '11',
+          age: '18',
+          height: '178',
+          displayName: 'Flame Author',
+          profilePicture: '',
+          contact: '',
+          biography: '',
+          preferences: new Set(),
+          dislikes: new Set()
+        },
+        {
+          id: 2,
+          email: '',
+          address: '',
+          phoneNumber: '',
+          age: '36',
+          height: '162',
+          displayName: 'Sindy Clasue',
+          profilePicture: '',
+          contact: '',
+          biography: '',
+          preferences: new Set(),
+          dislikes: new Set()
+        },
+        {
+          id: 3,
+          email: '',
+          address: '',
+          phoneNumber: '',
+          age: '18',
+          height: '178',
+          displayName: 'Austin Author',
+          profilePicture: '',
+          contact: '',
+          biography: '',
+          preferences: new Set(),
+          dislikes: new Set()
+        }
+      ]
     }
   },
   setup() {
@@ -78,6 +98,10 @@ export default {
     loadUser(){
       fetch("API_BASE_URL").then(({data}) => (this.users = data.data))
           .catch(error => console.log(error.message))
+    },
+    setProfile(index){
+      this.activeProfile=this.users[index],
+      this.active=true
     },
     tester(){
       this.users = mockUserList
@@ -108,6 +132,9 @@ export default {
     goNext(){
       this.next_user();
       router.push('/edit-profile' + user.id);
+    },
+    closeProfile(){
+      this.active = false;
     },
     like_user(){
 
