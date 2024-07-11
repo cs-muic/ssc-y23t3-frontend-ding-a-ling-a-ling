@@ -2,6 +2,7 @@
   <div class="matching">
     <h1>Welcome to the Matching Page</h1>
     <router-link to="/edit-profile" class="button">Edit Profile</router-link>
+    <router-link to="/imgTest" class="nav-button">ImageTest</router-link>
   </div>
 
 

@@ -1,63 +1,64 @@
-<!--This is the file where you can test the image upload functionality-->
 <template>
   <form @submit.prevent="imageTest">
-    <v-card
-        color="red-darken-1"
-        variant="outlined"
-        class="mb-2"
-    >
-      <v-card-item class="my-5 ">
+    <!-- Your file upload UI -->
+    <v-file-input
+        v-model="file"
+        accept="image/png, image/jpeg, image/bmp"
+        label="Profile Picture"
+        placeholder="Upload Profile Picture"
+        prepend-icon="mdi-camera"
+    ></v-file-input>
 
-        <div class="mx-auto d-flex flex-row">
-          <div class="mx-5">
-            <v-avatar color="red-lighten-2" size="100">
-              <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>
-            </v-avatar>
-          </div>
-          <v-col class="flex-0-1">
-            <v-file-input
-                v-model="profilePicture"
-                accept="image/png, image/jpeg, image/bmp"
-                label="Profile Picture"
-                placeholder="Upload Profile Picture"
-                prepend-icon="mdi-camera"
-            ></v-file-input>
-          </v-col>
-        </div>
-      </v-card-item>
-    </v-card>
-    <v-card color="secondary" variant="tonal">
-      <v-card-actions>
-        <v-btn type="submit" color="primary">Submit</v-btn>
-      </v-card-actions>
-    </v-card>
+    <v-card-item>
+      <v-text-field v-model="username" type="text" placeholder="username" ></v-text-field>
+    </v-card-item>
 
+    <!-- Submit button -->
+    <v-btn type="submit" color="primary">Submit</v-btn>
   </form>
-
 </template>
-
 
 <script>
 import apiClient from '@/axiosConfig'; // Import the Axios configuration
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
 export default {
   name: 'ImageTest',
   setup() {
-    const profilePicture = ref('');
+    const file = ref(null);
+    const username = ref('');
 
     const imageTest = async () => {
       try {
-        const response = await apiClient.post('/imageTest', {profilePicture: profilePicture.value});
-        console.log('Test response:', response.data); // Logging response data
-      }
-      catch (error) {
-        console.error('Error:', error); // Logging error
+        // Check if token exists in localStorage
+        // const token = localStorage.getItem('token');
+        // if (!token) {
+        //   console.error('No token found, please log in');
+        //   return;
+        // }
+
+        // Create FormData object and append file data
+        const formData = new FormData();
+
+        formData.append('file', file.value);
+
+        // Send POST request to upload endpoint
+        const response = await apiClient.post('/test/imgTest', formData)
+        console.log('Upload response:', response.data);
+
+        // Optionally reset file input after successful upload
+        file.value = null;
+      } catch (error) {
+        console.error('Upload failed:', error);
+        // Handle error as needed
       }
     };
 
-    return { profilePicture, imageTest };
+    return { file, imageTest };
   }
 };
 </script>
+
+<style scoped>
+/* Add any scoped styles you need for your component */
+</style>

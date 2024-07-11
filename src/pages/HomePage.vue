@@ -3,6 +3,7 @@
     <header class="app-header">
       <router-link to="/signin" class="nav-button">Login</router-link>
       <router-link to="/signup" class="nav-button">SignUp</router-link>
+      <router-link to="/imgTest" class="nav-button">ImageTest</router-link>
     </header>
     <div class="main-content">
       <h1 class="header">DingALingALing Dating Website</h1>

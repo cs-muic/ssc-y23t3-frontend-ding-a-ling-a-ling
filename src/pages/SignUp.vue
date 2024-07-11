@@ -53,27 +53,24 @@
           <v-text-field v-model="lastName" type="text" placeholder="Last Name" required></v-text-field>
         </v-card-item>
 
-<!--        <v-card-item class="my-5 ">-->
-<!--          <div class="mx-auto d-flex flex-row">-->
-<!--            <div class="mx-5">-->
-<!--              <v-avatar color="red-lighten-2" size="100">-->
-<!--                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>-->
-<!--              </v-avatar>-->
-<!--            </div>-->
-<!--            <v-col class="flex-0-1">-->
-<!--              <v-file-input-->
-<!--                  v-model="user.profilePicture"-->
-<!--                  accept="image/png, image/jpeg, image/bmp"-->
-<!--                  label="Profile Picture"-->
-<!--                  placeholder="Upload Profile Picture"-->
-<!--                  prepend-icon="mdi-camera"-->
-<!--              ></v-file-input>-->
-<!--            </v-col>-->
-<!--          </div>-->
-            <v-card-item>
-              <v-text-field v-model="profilePicture" type="text" placeholder="Profile Picture" required></v-text-field>
-            </v-card-item>
-<!--        </v-card-item>-->
+        <v-card-item class="my-5 ">
+          <div class="mx-auto d-flex flex-row">
+            <div class="mx-5">
+              <v-avatar color="red-lighten-2" size="100">
+                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>
+              </v-avatar>
+            </div>
+            <v-col class="flex-0-1">
+              <v-file-input
+                  v-model="profilePicture"
+                  accept="image/png, image/jpeg, image/bmp"
+                  label="Profile Picture"
+                  placeholder="Upload Profile Picture"
+                  prepend-icon="mdi-camera"
+              ></v-file-input>
+            </v-col>
+          </div>
+        </v-card-item>
 
         <v-card-item>
 
@@ -264,7 +261,7 @@ export default {
     const age = ref(null);
     const height = ref(null);
     const displayName = ref('');
-    const profilePicture = ref('');
+    const profilePicture = ref(null);
     const contact = ref('');
     const biography = ref('');
     const dislikes = ref([]);
@@ -272,26 +269,36 @@ export default {
 
     const handleSignUp = async () => {
       try {
-        const response = await apiClient.post('/signup', {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          email: email.value,
-          password: password.value,
-          username: username.value,
-          address: address.value,
-          phoneNumber: phoneNumber.value,
-          age: age.value,
-          height: height.value,
-          displayName: displayName.value,
-          profilePicture: profilePicture.value,
-          contact: contact.value,
-          biography: biography.value,
-          dislikes: dislikes.value,
-          preferences: preferences.value
-        });
-        console.log('Sign Up response:', response.data); // Logging response data
+        const formData = new FormData();
+        formData.append('profilePicture', profilePicture.value);
+        formData.append('firstName', firstName.value);
+        formData.append('lastName', lastName.value);
+        formData.append('email', email.value);
+        formData.append('password', password.value);
+        formData.append('username', username.value);
+        formData.append('address', address.value);
+        formData.append('phoneNumber', phoneNumber.value);
+        formData.append('age', age.value);
+        formData.append('height', height.value);
+        formData.append('displayName', displayName.value);
+        formData.append('contact', contact.value);
+        formData.append('biography', biography.value);
+        formData.append('dislikes', dislikes.value);
+        formData.append('preferences', preferences.value);
+
+        const reply = await apiClient.post('/signup', formData);
+
+        // Destructure the token and reply from the response data
+        const { token, response } = reply.data;
+
+        // You can now use the token and reply as needed
+        alert('Signup successful:'+ response);
+        // console.log('Token:', token);
+
+        // For example, you might store the token in localStorage or cookies
+        localStorage.setItem('authToken', token);
+
         // grabbing the token back from the server (which will be in local storage)
-        const { token } = response.data;
         if (token) {
           localStorage.setItem('token', token); // Store the oken
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set default header
@@ -313,6 +320,7 @@ export default {
       username,
       handleSignUp };
   }
+
 };
 </script>
 
