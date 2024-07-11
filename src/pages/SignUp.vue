@@ -293,7 +293,7 @@ export default {
         // grabbing the token back from the server (which will be in local storage)
         const { token } = response.data;
         if (token) {
-          localStorage.setItem('token', token); // Store the token
+          localStorage.setItem('token', token); // Store the oken
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set default header
           console.log('Signed up successfully');
           await router.push('/matching'); // Redirect to matching page

@@ -12,6 +12,7 @@ import Login from '@/pages/Login.vue';  // Ensure this path is correct
 import SignUp from "@/pages/SignUp.vue";
 import MatchingPage from "@/pages/MatchingPage.vue";
 import EditProfile from "@/pages/EditProfile.vue";
+import ImageTest from "@/pages/ImageTest.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,7 +21,9 @@ const router = createRouter({
     {path: '/signin', component: Login},
     {path: '/signup', component: SignUp},
     {path: '/matching', component: MatchingPage},
-    {path: '/edit-profile', component: EditProfile}
+    {path: '/edit-profile', component: EditProfile},
+    {path: '/imgTest', component: ImageTest}
+
   ],
 });
 
