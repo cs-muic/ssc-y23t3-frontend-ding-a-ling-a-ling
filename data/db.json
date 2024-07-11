@@ -1,0 +1,60 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "",
+      "address": "",
+      "phoneNumber": "11",
+      "age": "18",
+      "height": "178",
+      "displayName": "Flame Author",
+      "profilePicture": "",
+      "contact": "",
+      "biography": "",
+      "preferences": [],
+      "dislikes": []
+    },
+    {
+      "id": 2,
+      "email": "",
+      "address": "",
+      "phoneNumber": "11",
+      "age": "18",
+      "height": "178",
+      "displayName": "F Author",
+      "profilePicture": "",
+      "contact": "",
+      "biography": "",
+      "preferences": [],
+      "dislikes": []
+    },
+    {
+      "id": 3,
+      "email": "",
+      "address": "",
+      "phoneNumber": "11",
+      "age": "18",
+      "height": "178",
+      "displayName": "Fl Author",
+      "profilePicture": "",
+      "contact": "",
+      "biography": "",
+      "preferences": [],
+      "dislikes": []
+    },
+    {
+      "id": 4,
+      "email": "",
+      "address": "",
+      "phoneNumber": "11",
+      "age": "18",
+      "height": "178",
+      "displayName": "Fla Author",
+      "profilePicture": "",
+      "contact": "",
+      "biography": "",
+      "preferences": [],
+      "dislikes": []
+    }
+  ]
+}
