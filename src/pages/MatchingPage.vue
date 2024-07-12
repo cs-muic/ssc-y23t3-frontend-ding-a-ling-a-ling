@@ -2,21 +2,10 @@
   <div class="matching">
     <h1>Welcome to the Matching Page</h1>
     <router-link to="/edit-profile" class="button">Edit Profile</router-link>
-    <!--<div v-if="users.length">
-      <div v-for="user in users" :key="user.id" class="user">
-        <router-link :to="{ name: 'Matches', params: { id: user.id }}">
-          <h2>
-            {{user.displayName}}
-          </h2>
-        </router-link>
-      </div>
-    </div>
-    <div v-else>
-      Loading Page
-    </div>-->
   </div>
   <button style="font-size:24px" @click="swipeRight()">Like <i class="fa fa-heart"></i></button>
-  
+  <router-link to="/mymatches" class="button">See My Matches</router-link>
+
 
 </template>
 
@@ -25,9 +14,14 @@
 
 <script>
 import {useRouter} from 'vue-router';
+import apiClient from "@/axiosConfig";
+import VueTinder from 'vue-tinder';
 
 export default {
   name: 'Matching',
+  components: {
+    VueTinder
+  },
   data(){
     return{
       user: "",
@@ -42,18 +36,25 @@ export default {
   },
   methods:{
     async nextUser(){
-      this.user = await fetch('baseURL/users') //actually connect it to db and check for format
+      this.user = await fetch('baseURL/users')
           .then(res => res.json())
           .then(data => this.users = data)
           .catch(err => console.log(err.message));
+      //actually connect it to db and check for format
   },
     async swipeRight(){
-      this.matched.push(this.user)
       //send it database as well
-      await this.nextUser()
+      try {
+        const response = await apiClient.post('baseURL', this.user);
+        console.log('Liked response:', response.data); // Logging response data
+        // grabbing the token back from the server (which will be in local storage)
+        const { token } = response.data;
+      } catch (error) {
+        console.error('liked failed:', error.response ? error.response.data : error);
+        alert(`liked failed: ${error.response ? error.response.data.message : "Network or server error"}`);
+      }
     },
     async swipeLeft(){
-      this.noped.push(this.user)
       //send it database as well, also double check how to handle so we dont get duplicate users
       await this.nextUser()
     },

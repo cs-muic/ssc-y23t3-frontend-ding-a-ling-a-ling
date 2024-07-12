@@ -21,6 +21,9 @@
     <p>{{user.age}}</p>
     <p>{{user.biography}}</p>
     <p>{{user.preferences}}</p>
+    <v-img>
+      {{user.profilePicture}}
+    </v-img>
   </div>
   <div v-else>
     <p>

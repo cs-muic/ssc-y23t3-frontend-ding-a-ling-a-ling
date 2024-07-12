@@ -49,7 +49,7 @@ export default {
 
     const imageTest = async () => {
       try {
-        const response = await apiClient.post('/imageTest', {profilePicture: profilePicture.value});
+        const response = await apiClient.post('http://localhost:8000/users/', {profilePicture: profilePicture.value});
         console.log('Test response:', response.data); // Logging response data
       }
       catch (error) {

@@ -8,8 +8,8 @@
 import { registerPlugins } from '@/plugins'
 import App from './App.vue'
 import { vuetify } from '@/plugins/vuetify'
+import VueTinder from 'vue-tinder'
 
-// Components
 
 // Composables
 import { createApp } from 'vue'
@@ -22,4 +22,5 @@ app.use(vuetify)
 
 app.mount('#app')
 
+app.use(VueTinder)
 
