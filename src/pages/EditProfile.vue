@@ -28,29 +28,31 @@
           <v-text-field v-model="lastName" type="text" placeholder="Last Name"></v-text-field>
         </v-card-item>
 
-<!--        <v-card-item class="my-5 ">-->
-<!--          <div class="mx-auto d-flex flex-row">-->
-<!--            <div class="mx-5">-->
-<!--              <v-avatar color="red-lighten-2" size="100">-->
-<!--                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>-->
-<!--              </v-avatar>-->
-<!--            </div>-->
-<!--            <v-col class="flex-0-1">-->
-<!--              <v-file-input-->
-<!--                  v-model="profilePicture"-->
-<!--                  accept="image/png, image/jpeg, image/bmp"-->
-<!--                  label="Profile Picture"-->
-<!--                  placeholder="Upload Profile Picture"-->
-<!--                  prepend-icon="mdi-camera"-->
-<!--              ></v-file-input>-->
-<!--            </v-col>-->
-<!--          </div>-->
-<!--        </v-card-item>-->
+        <v-card-item class="my-5 ">
+          <div class="mx-auto d-flex flex-row">
+            <div class="mx-5">
+              <v-avatar color="red-lighten-2" size="100">
+                <v-icon size="80" color="red-lighten-4" icon="mdi-account-circle"></v-icon>
+              </v-avatar>
+            </div>
+            <v-col class="flex-0-1">
+              <v-file-input
+                  v-model="profilePicture"
+                  accept="image/png, image/jpeg, image/bmp"
+                  label="Profile Picture"
+                  placeholder="Upload Profile Picture"
+                  prepend-icon="mdi-camera"
+              ></v-file-input>
+            </v-col>
+          </div>
+        </v-card-item>
+
+<!--        <v-card-item>-->
+<!--        <v-text-field v-model="profilePicture" type="text" placeholder="Profile Picture"></v-text-field><v-card-item>-->
+
 
         <v-card-item>
-        <v-text-field v-model="profilePicture" type="text" placeholder="Profile Picture"></v-text-field><v-card-item>
-
-        </v-card-item>  <v-text-field v-model="displayName" type="text" placeholder="Display Name" ></v-text-field>
+        <v-text-field v-model="displayName" type="text" placeholder="Display Name" ></v-text-field>
         </v-card-item>
 
         <v-card-item>
@@ -213,34 +215,39 @@ export default {
     const age = ref(null);
     const height = ref(null);
     const displayName = ref('');
-    const profilePicture = ref('');
+    const profilePicture = ref(null);
     const contact = ref('');
     const biography = ref('');
     const dislikes = ref([]);
     const preferences = ref([]);
+
 
     const editProfile = async () => {
       try {
         if (!localStorage.getItem('token') === null) {
           alert('You must be logged in to edit your profile');
         }
-        const response = await apiClient.post('user/update', {
-          token: localStorage.getItem('token'),
-          firstName: firstName.value,
-          lastName: lastName.value,
-          address: address.value,
-          phoneNumber: phoneNumber.value,
-          age: age.value,
-          height: height.value,
-          displayName: displayName.value,
-          profilePicture: profilePicture.value,
-          contact: contact.value,
-          biography: biography.value,
-          dislikes: dislikes.value,
-          preferences: preferences.value
-        });
 
-        console.log('Edit Profile response:', response.data); // Logging response data
+
+        const formData = new FormData();
+
+        formData.append('firstName', firstName.value);
+        formData.append('lastName', lastName.value);
+        formData.append('address', address.value);
+        formData.append('phoneNumber', phoneNumber.value);
+        formData.append('age', age.value);
+        formData.append('height', height.value);
+        formData.append('displayName', displayName.value);
+        formData.append('profilePicture', profilePicture.value);
+        formData.append('contact', contact.value);
+        formData.append('biography', biography.value);
+        formData.append('dislikes', dislikes.value);
+        formData.append('preferences', preferences.value);
+        formData.append('token', localStorage.getItem('token'));
+
+        const response = await apiClient.post('user/update', formData);
+
+        console.log('Edit Profile response:', response.data);
         // grabbing the token back from the server (which will be in local storage)
         if (response.data) {
           alert('Profile updated successfully');
