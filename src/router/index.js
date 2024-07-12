@@ -13,7 +13,8 @@ import SignUp from "@/pages/SignUp.vue";
 import MatchingPage from "@/pages/MatchingPage.vue";
 import EditProfile from "@/pages/EditProfile.vue";
 import Matches from '@/pages/Matches.vue';
-import Error from '@/pages/Error.vue'
+import Error from '@/pages/Error.vue';
+import ImageTest from "@/pages/ImageTest.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +26,8 @@ const router = createRouter({
     {path: '/matching/:id', name: 'Matches', component: Matches, props: true},
     {path: '/edit-profile', component: EditProfile},
     {path: '/all-match', redirect: '/matching'},
-    {path: '/:catch(.*)', component: Error}
+    {path: '/:catch(.*)', component: Error},
+    {path: '/imgTest', component: ImageTest}
   ],
 });
 
