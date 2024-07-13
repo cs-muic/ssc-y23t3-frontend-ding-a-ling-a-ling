@@ -6,12 +6,6 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  name: 'App',
-}
+<script lang="ts" setup>
+  //
 </script>
-
-<style>
-/* Global styles */
-</style>
