@@ -6,6 +6,7 @@ import Layouts from 'vite-plugin-vue-layouts'
 import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import svgLoader from 'vite-svg-loader'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -23,7 +24,7 @@ export default defineConfig({
         'vue',
         {
           'vue-router/auto': ['useRoute', 'useRouter'],
-        }
+        },
       ],
       dts: 'src/auto-imports.d.ts',
       eslintrc: {
@@ -37,6 +38,9 @@ export default defineConfig({
     Vue({
       template: { transformAssetUrls },
     }),
+    svgLoader({
+      svgoConfig: {},
+    }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
       autoImport: true,
@@ -46,8 +50,8 @@ export default defineConfig({
     }),
     Fonts({
       google: {
-        families: [ {
-          name: 'Roboto',
+        families: [{
+          name: 'Rubik',
           styles: 'wght@100;300;400;500;700;900',
         }],
       },
