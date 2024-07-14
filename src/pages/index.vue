@@ -1,12 +1,10 @@
 <template>
-  <HomeHeader/>
   <div class="content">
     <OnboardCard/>
     TODO: Add a loop to display onboard cards
     <OnboardCard/>
     <OnboardCard/>
     <OnboardCard/>
-    <AppFooter/>
   </div>
 </template>
 
