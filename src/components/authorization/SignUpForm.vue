@@ -4,7 +4,7 @@
     <v-card
       color="white"
       variant="flat"
-      class="border-radius border-thin mb-5"
+      class="border-thin mb-5"
     >
       <div>
         <v-card-item class="px-8">
@@ -28,7 +28,8 @@
     <v-card
       color="white"
       variant="flat"
-      class="border-radius border-thin mb-5"
+      class="
+ border-thin mb-5"
     >
       <div>
         <v-card-item class="px-8">
@@ -58,7 +59,8 @@
     <v-card
       color="white"
       variant="flat"
-      class="border-radius border-thin mb-5"
+      class="
+ border-thin mb-5"
     >
       <div>
         <v-card-item class="px-8">
@@ -116,7 +118,8 @@
     <v-card
       color="primary"
       variant="flat"
-      class="border-radius border-thin mb-5"
+      id="btm"
+      class="border-thin mb-5"
     >
       <div>
         <v-card-item class="px-8">
@@ -262,6 +265,11 @@ export default {
 </script>
 
 <style scoped>
+
+#btm {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
 
 </style>
 
