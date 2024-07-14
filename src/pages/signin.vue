@@ -3,7 +3,8 @@
     <v-card
       color="primary"
       variant="flat"
-      class="border-radius border-thin mb-5"
+      class="border-thin mb-5"
+      id="top"
     >
       <div>
         <v-card-item class="px-8">
@@ -60,6 +61,11 @@ hr {
 
 .border-radius {
   border-radius: 16px;
+}
+
+#top {
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
 #annotation {
