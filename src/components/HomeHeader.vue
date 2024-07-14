@@ -5,7 +5,7 @@ import Heart from '../assets/common/heart.svg'
 </script>
 <template>
   <v-toolbar
-    class="py-2"
+    class="py-2 pe-8" id="nav"
   >
     <v-toolbar-title
     class="mx-0"
@@ -23,7 +23,6 @@ import Heart from '../assets/common/heart.svg'
         :key="item.title"
         :to="item.path"
       >
-        <v-icon left dark>{{ item.icon }}</v-icon>
         {{ item.title }}
       </v-btn>
     </v-toolbar-items>
@@ -41,19 +40,12 @@ export default {
       sidebar: false,
       menuItems: [
         {
-          title: 'Home',
-          path: '/home',
-          icon: 'home'
-        },
-        {
           title: 'Sign Up',
           path: '/signup',
-          icon: 'face'
         },
         {
           title: 'Sign In',
           path: '/signin',
-          icon: 'lock_open'
         }
       ]
     }
@@ -61,5 +53,10 @@ export default {
 }
 </script>
 <style>
-
+#nav {
+  z-index: 999;
+  backdrop-filter: blur(20px);
+  position: fixed;
+  background: rgba(255, 255, 255, 0.9);
+  //background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 67%, rgba(255,255,255,0.8211659663865546) 89%, rgba(255,255,255,0.3085609243697479) 100%);}
 </style>
