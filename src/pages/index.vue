@@ -1,10 +1,10 @@
 <template>
-  <div class="content">
-    <OnboardCard/>
-    TODO: Add a loop to display onboard cards
-    <OnboardCard/>
-    <OnboardCard/>
-    <OnboardCard/>
+  <div class="content d-flex justify-center align-center">
+    <HeroHomeCard/>
+<!--    TODO: Add a loop to display onboard cards-->
+<!--    <HeroHomeCard/>-->
+<!--    <HeroHomeCard/>-->
+<!--    <HeroHomeCard/>-->
   </div>
 </template>
 
@@ -16,6 +16,8 @@
    padding-top: 70px;
    padding-right: 80px;
    padding-left: 80px;
+   padding-bottom: 55px;
+   height: 100vh;
  }
 
 </style>
