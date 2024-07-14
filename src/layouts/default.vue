@@ -1,6 +1,6 @@
 <template>
-  <v-app>
-    <HomeHeader/>
+  <v-app >
+    <AppHeader/>
     <v-main>
       <router-view />
     </v-main>
@@ -9,5 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import AppFooter from '@/components/example/AppFooter.vue'
+import AppFooter from '@/components/AppFooter.vue'
+import AppHeader from '@/components/AppHeader.vue'
 </script>
