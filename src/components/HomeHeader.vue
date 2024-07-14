@@ -10,9 +10,10 @@ import Heart from '../assets/common/heart.svg'
     >
       <router-link to="/" tag="span" style="cursor: pointer">
         <Logo class="mr-1"/>
+        <Cross class="mr-1"/>
+        <Heart class=""/>
       </router-link>
-      <Cross class="mr-1"/>
-      <Heart class=""/>
+
     </v-toolbar-title>
     <v-toolbar-items class="hidden-xs-only mr-4">
       <v-btn
@@ -29,12 +30,13 @@ import Heart from '../assets/common/heart.svg'
 
 <script>
 import AppFooter from '@/components/example/AppFooter.vue'
+import AuthDialog from '@/components/AuthDialog.vue'
 
 export default {
-  name: 'App',
-  components: { AppFooter },
+  components: { AppFooter, AuthDialog},
   data () {
     return {
+      isSignUp: false,
       sidebar: false,
       menuItems: [
         {
@@ -48,6 +50,16 @@ export default {
       ]
     }
   },
+  methods: {
+    openSignIn() {
+      this.isSignUp = false;
+      this.$refs.authDialog.open();
+    },
+    openSignUp() {
+      this.isSignUp = true;
+      this.$refs.authDialog.open();
+    }
+  }
 }
 </script>
 <style>
