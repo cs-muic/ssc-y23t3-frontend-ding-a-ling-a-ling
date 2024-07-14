@@ -39,7 +39,7 @@ export default defineConfig({
       template: { transformAssetUrls },
     }),
     svgLoader({
-      svgoConfig: {},
+      svgConfig: {},
     }),
     // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
     Vuetify({
