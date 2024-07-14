@@ -31,7 +31,7 @@ const HateMatchTheme: ThemeDefinition = {
   },
   variables: {
     'border-color': '#2B201A',
-    'border-opacity': 0.12,
+    'border-opacity': 1.0,
     'high-emphasis-opacity': 0.87,
     'medium-emphasis-opacity': 0.60,
     'disabled-opacity': 0.38,
