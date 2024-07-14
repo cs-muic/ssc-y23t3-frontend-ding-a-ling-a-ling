@@ -15,7 +15,7 @@
       &copy; {{ (new Date()).getFullYear() }} <span class="d-none d-sm-inline-block">HateMatch, LLC</span>
       —
       <a
-        class="text-decoration-none on-surface"
+        class="text-caption text-decoration-none on-surface"
         href="/"
         rel="noopener noreferrer"
         target="_blank"

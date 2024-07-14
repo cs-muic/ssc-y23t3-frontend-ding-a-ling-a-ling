@@ -1,8 +1,6 @@
 <template>
-  <div class="mx-5">
-    <HomeHeader/>
-    <hr class="mb-10"/>
-    <hr class="mb-10"/>
+  <HomeHeader/>
+  <div class="content">
     <OnboardCard/>
     TODO: Add a loop to display onboard cards
     <OnboardCard/>
@@ -16,5 +14,10 @@
 </script>
 
 <style scoped>
+ .content {
+   padding-top: 70px;
+   padding-right: 80px;
+   padding-left: 80px;
+ }
 
 </style>
