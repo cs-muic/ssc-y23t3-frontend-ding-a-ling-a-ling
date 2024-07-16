@@ -1,21 +1,22 @@
 <template>
-  <div class="content">
+  <div class="content over">
     <v-card
       color="primary"
       variant="flat"
-      class="border-thin mb-5"
+      class="border-thin mb-5 align-center border-radius border-thin w-100 h-100 my-auto px-8 overflow-scroll"
       id="top"
     >
       <div>
-        <v-card-item class="px-8">
-          <div class="mb-12"></div>
+        <v-card-item class="px-8 mb-4">
+          <div class="mb-9"></div>
           <div class="text-h2 font-weight-bold text-center text-capitalize">Sign In</div>
-
           <div class="mb-4"></div>
           <div class="text-h5 font-weight-light text-center">Back for more?</div>
         </v-card-item>
+
+        <SignInForm />
+
         <v-card-item class="px-8">
-          <div class="mb-5"></div>
           <hr class="mb-5 opacity-50"/>
           <div class="w-100 d-flex justify-center ga-2">
             <div class="text-subtitle-1 font-weight-light text-center my-auto">Don't have an account?</div>
@@ -31,17 +32,14 @@
             <v-btn variant="flat" class="rounded-pill border-thin text-caption px-2 py-1" to="/signup">Sign Up
             </v-btn>
           </div>
-
           <div class="mb-4"></div>
-        </v-card-item>
-      </div>
+        </v-card-item>      </div>
     </v-card>
-    <SignUpForm/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import SignUpForm from '@/components/authorization/SignUpForm.vue'
+import SignInForm from '@/components/authorization/SignInForm.vue'
 </script>
 
 <style scoped>
@@ -56,7 +54,9 @@ hr {
   padding-top: 70px;
   padding-right: 80px;
   padding-left: 80px;
-  overflow: hidden;
+  padding-bottom: 55px;
+  height: 100vh;
+
 }
 
 .border-radius {
@@ -66,6 +66,8 @@ hr {
 #top {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
 }
 
 #annotation {

@@ -8,7 +8,7 @@
     >
       <div>
         <v-card-item class="px-8">
-          <div class="mb-12"></div>
+          <div class="mb-9"></div>
           <div class="text-h2 font-weight-bold text-center text-capitalize">Sign Up</div>
 
           <div class="mb-4"></div>

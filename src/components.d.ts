@@ -14,9 +14,11 @@ declare module 'vue' {
     FormTitleCards: typeof import('./components/FormTitleCards.vue')['default']
     HeroHomeCard: typeof import('./components/HeroHomeCard.vue')['default']
     HomeHeader: typeof import('./components/HomeHeader.vue')['default']
+    LoginForm: typeof import('./components/authorization/LoginForm.vue')['default']
     Preloader: typeof import('./components/Preloader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SignInForm: typeof import('./components/authorization/SignInForm.vue')['default']
     SignUpForm: typeof import('./components/authorization/SignUpForm.vue')['default']
     SignUpHeader: typeof import('./components/SignUpHeader.vue')['default']
   }

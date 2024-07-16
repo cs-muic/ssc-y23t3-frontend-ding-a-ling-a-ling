@@ -134,19 +134,19 @@
           <v-row dense
           >
             <v-col cols="12">
-              <v-select
-                v-model="dislikes"
-                :items="dislikeOptions"
-                label="What You Hate"
-                multiple
-              ></v-select>
+<!--              <v-select v-model="dislikes" :items="dislikeOptions" label="Lifestyle" multiple ></v-select>-->
+<!--              <v-select v-model="dislikes" :items="dislikeOptions" label="Hobbies" multiple ></v-select>-->
+<!--              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>-->
+<!--              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>-->
+<!--              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>-->
+              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>
             </v-col>
           </v-row>
           <div class="mb-5"></div>
 
           <div class="d-flex mb-12">
             <v-btn variant="flat" height="50"
-                   class="rounded-pill mx-auto flex font-weight-regular border-thin text-h5 px-8" type="submit"
+                  class="rounded-pill mx-auto flex font-weight-regular border-thin text-h5 px-8" type="submit"
             > Sign Up
             </v-btn>
           </div>
@@ -182,7 +182,8 @@ import { useRouter } from 'vue-router'
 
 export default {
   name: 'SignUp',
-  setup () {
+
+  setup: function () {
     const router = useRouter()
     const firstName = ref('')
     const lastName = ref('')
@@ -200,8 +201,29 @@ export default {
     const dislikes = ref([])
     const preferences = ref([])
 
-    const dislikeOptions = ['Option 1', 'Option 2', 'Option 3']
-    const preferenceOptions = ['Option A', 'Option B', 'Option C']
+    let preferenceOptions = []
+    let dislikeOptions = []
+
+    try {
+      dislikeOptions = ['Option 1', 'Option 2']
+      preferenceOptions = ['Male', 'Female']
+
+      if (false) {
+        preferenceOptions = apiClient.get('/signup/preferences', {
+          params: {
+            category: 'preference'
+          }
+        })
+        dislikeOptions = apiClient.get('/signup/dislikes', {
+          params: {
+            category: 'dislikes'
+          }
+        })
+      }
+    } catch (error) {
+      console.error('Getting preferences and dislikes failed:', error.response ? error.response.data : error)
+      alert(`Getting preferences and dislikes failed:: ${error.response ? error.response.data.message : 'Network or server error'}`)
+    }
 
     const handleSignUp = async () => {
       try {
@@ -224,7 +246,7 @@ export default {
         })
         console.log('Sign Up response:', response.data) // Logging response data
         // grabbing the token back from the server (which will be in local storage)
-        const { token } = response.data
+        const { token } = response.data;
         if (token) {
           localStorage.setItem('token', token) // Store the token
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}` // Set default header
@@ -263,6 +285,8 @@ export default {
   }
 }
 </script>
+
+
 
 <style scoped>
 
