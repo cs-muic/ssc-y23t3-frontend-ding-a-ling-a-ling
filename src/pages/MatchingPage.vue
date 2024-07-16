@@ -5,39 +5,26 @@
     <router-link to="/imgTest" class="nav-button">ImageTest</router-link>
   </div>
 
-  <div>
-    <v-container>
-      <v-row>
-        <v-col class="mx-auto" cols="12" sm="8" md="8" lg="8" xl="8">
-          <v-card color="blue lighten-1" class="mb-4">
-            <v-card-title>Image Test Page</v-card-title>
-            <v-card-text>
-              <v-text-field
-                  v-model="username"
-                  label="Enter Username"
-                  placeholder="Username"
-              ></v-text-field>
-              <v-btn @click="fetchImages">Fetch Images</v-btn>
-            </v-card-text>
-          </v-card>
-          <v-row>
-            <v-col v-for="(imageUrl, index) in imageUrls" :key="index" cols="12" md="4">
-              <v-img :src="imageUrl" :alt="'Image ' + (index + 1)"></v-img>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
 </template>
 
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import apiClient from "@/axiosConfig";
 
 export default {
   name: 'MatchingPage',
+  data(){
+    return{
+      users: []
+    }
+  },
+  methods:{
+    async moreUser(){
+      await apiClient.get('users/matches').then(data => this.users = data).catch(err => console.log(err.message))
+    }
+  },
   setup() {
     const router = useRouter();
     const imageUrls = ref([]);
@@ -60,7 +47,6 @@ export default {
         console.error('Error fetching images:', error);
       }
     }
-
     function convertToImageUrls(base64Images) {
       base64Images.forEach((base64Image) => {
         const imageUrl = `data:image/png;base64,${base64Image}`; // Adjust MIME type if needed
