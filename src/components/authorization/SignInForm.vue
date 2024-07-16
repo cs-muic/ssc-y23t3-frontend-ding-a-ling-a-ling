@@ -52,7 +52,7 @@ export default {
           console.log("token in use" + localStorage.getItem('token'));
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set default header
           console.log(response)
-          // await router.push('/matching'); // Redirect to matching page
+          await router.push('/index'); // Redirect to matching page
         } else {
           console.error('No token received from server');
           alert('Failed to log in, no token received');

@@ -1,7 +1,4 @@
 <script setup>
-import Logo from '../assets/common/logo.svg'
-import Cross from '../assets/common/cross.svg'
-import Heart from '../assets/common/heart.svg'
 </script>
 
 <template>

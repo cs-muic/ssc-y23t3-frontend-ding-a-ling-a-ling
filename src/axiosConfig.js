@@ -7,13 +7,18 @@ const apiClient = axios.create({
   }
 });
 
-// Add a request interceptor to include the token
 apiClient.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
-  return config
+
+  // If the request is FormData (multipart/form-data), update Content-Type header
+  if (config.data instanceof FormData) {
+    config.headers['Content-Type'] = 'multipart/form-data';
+  }
+
+  return config;
 }, error => {
   return Promise.reject(error);
 });
