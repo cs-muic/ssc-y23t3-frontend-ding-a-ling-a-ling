@@ -1,4 +1,4 @@
-import { Edit, Layout, Match, Profile } from '@/pages/user'
+import { Edit, Layout, Match, Profile } from '@/views/user'
 
 export default {
   path: '/user',

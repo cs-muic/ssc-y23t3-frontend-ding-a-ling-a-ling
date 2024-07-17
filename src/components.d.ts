@@ -7,14 +7,19 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Alert: typeof import('./components/Alert.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppHeader: typeof import('./components/AppHeader.vue')['default']
     FormTitleCards: typeof import('./components/FormTitleCards.vue')['default']
     HeroHomeCard: typeof import('./components/HeroHomeCard.vue')['default']
+    HomeFooter: typeof import('./components/HomeFooter.vue')['default']
+    HomeHeader: typeof import('./components/HomeHeader.vue')['default']
     Preloader: typeof import('./components/Preloader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SignInForm: typeof import('./components/account/SignInForm.vue')['default']
-    SignUpForm: typeof import('./components/account/SignUpForm.vue')['default']
+    SignInForm: typeof import('./components/SignInForm.vue')['default']
+    SignUpForm: typeof import('./components/SignUpForm.vue')['default']
+    UserFooter: typeof import('./components/user/UserFooter.vue')['default']
+    UserHeader: typeof import('./components/user/UserHeader.vue')['default']
   }
 }

@@ -17,8 +17,9 @@
     </div>
     <div class="mb-5"></div>
     <div class="w-100 d-flex">
-      <v-btn variant="flat" class="rounded-pill mx-auto border-thin text-lg" to="/signup">Start Finding Love
-      </v-btn>
+        <v-btn variant="flat" class="rounded-pill mx-auto border-thin text-lg" to="signup">
+          Start Finding Love
+        </v-btn>
     </div>
 
     <div

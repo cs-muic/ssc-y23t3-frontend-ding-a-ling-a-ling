@@ -3,7 +3,7 @@
     <v-card
       color="primary"
       variant="flat"
-      class="border-thin mb-5 align-center border-radius border-thin w-100 h-100 my-auto px-8 overflow-scroll"
+      class="border-thin mb-5 align-center border-radius border-thin w-100 h-100 my-auto px-8 overflow-hidden"
       id="top"
     >
       <div>
