@@ -1,10 +1,47 @@
 <template>
   <div class="matching">
-    <h1>Welcome to the Matching Page</h1>
+    <h1>Find Someone to Hate with</h1>
     <router-link to="/edit-profile" class="button">Edit Profile</router-link>
-    <router-link to="/imgTest" class="nav-button">ImageTest</router-link>
+    <v-btn @click="this.moreUser" color="primary">Get more Matches</v-btn>
   </div>
+  <v-card
+      class="mx-auto"
+      elevation="24"
+      max-width="400"
+  >
+    <v-carousel
+        :continuous="false"
+        :show-arrows="false"
+        delimiter-icon="mdi-square"
+        height="500"
+        hide-delimiter-background
+    >
+      <v-carousel-item
+          v-for="(user, i) in this.users"
+          :key="i"
+      >
+        <v-sheet
+            height="100%"
+            tile
+        >
+          <div class="d-flex fill-height justify-center align-center">
+            <div class="text-h2">
+              <h2>{{user.displayName}}</h2>
+              <p>{{user.dislikes}}</p>
+              <p>{{user.preferences}}</p>
+              <p>{{user.age}}</p>
+              <p>{{user.height}}</p>
+            </div>
+            <v-img source="this.getImage" alt="">
 
+            </v-img>
+          </div>
+        </v-sheet>
+      </v-carousel-item>
+    </v-carousel>
+  </v-card>
+  <v-col class="text-center">
+  </v-col>
 </template>
 
 <script>
@@ -23,6 +60,9 @@ export default {
   methods:{
     async moreUser(){
       await apiClient.get('users/matches').then(data => this.users = data).catch(err => console.log(err.message))
+    },
+    async getImage(){
+      await axios.get('user/image/')
     }
   },
   setup() {
