@@ -9,7 +9,7 @@ const authStore = useAuthStore();
 <template>
   <v-toolbar class="px-16" id="nav">
     <v-toolbar-title class="ml-4 pt-1">
-      <router-link to="/" tag="span" style="cursor: pointer">
+      <router-link to="match" tag="span" style="cursor: pointer">
         <Logo class="mr-1" />
         <Cross class="mr-1" />
         <Heart class="" />

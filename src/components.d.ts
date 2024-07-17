@@ -10,10 +10,12 @@ declare module 'vue' {
     Alert: typeof import('./components/Alert.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppHeader: typeof import('./components/AppHeader.vue')['default']
+    copy: typeof import('./components/HeroHomeCard copy.vue')['default']
     FormTitleCards: typeof import('./components/FormTitleCards.vue')['default']
     HeroHomeCard: typeof import('./components/HeroHomeCard.vue')['default']
     HomeFooter: typeof import('./components/HomeFooter.vue')['default']
     HomeHeader: typeof import('./components/HomeHeader.vue')['default']
+    MatchCard: typeof import('./components/user/MatchCard.vue')['default']
     Preloader: typeof import('./components/Preloader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
@@ -21,5 +23,6 @@ declare module 'vue' {
     SignUpForm: typeof import('./components/SignUpForm.vue')['default']
     UserFooter: typeof import('./components/user/UserFooter.vue')['default']
     UserHeader: typeof import('./components/user/UserHeader.vue')['default']
+    UserMatchCard: typeof import('./components/user/UserMatchCard.vue')['default']
   }
 }

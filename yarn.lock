@@ -3481,6 +3481,11 @@ vue-tsc@^2.0.26:
     "@vue/language-core" "2.0.26"
     semver "^7.5.4"
 
+vue3-carousel@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.3.3.tgz#72cdddbeb5ab64dc6fc7d54ab133b644e4a72f8f"
+  integrity sha512-VsuOBE4LG9lxAiYGR9U7ps4RyJ4oFQGzk79/49ybvoxzNpahPAVWIDHKK3a1lOv0CSplFq6u4FvaFLZ8x3FgWg==
+
 vue@^3.4.21, vue@^3.4.31:
   version "3.4.31"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.4.31.tgz#83a3c4dab8302b0e974b0d4b92a2f6a6378ae797"
