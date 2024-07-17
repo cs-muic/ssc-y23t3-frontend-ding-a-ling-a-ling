@@ -2,17 +2,16 @@
 import Logo from '../assets/common/logo.svg'
 import Cross from '../assets/common/cross.svg'
 import Heart from '../assets/common/heart.svg'
+
 </script>
 
 <template>
   <v-toolbar class="px-16" id="nav">
-    <v-toolbar-title
-    class="ml-4 pt-1"
-    >
+    <v-toolbar-title class="ml-4 pt-1">
       <router-link to="/" tag="span" style="cursor: pointer">
-        <Logo class="mr-1"/>
-        <Cross class="mr-1"/>
-        <Heart class=""/>
+        <Logo class="mr-1" />
+        <Cross class="mr-1" />
+        <Heart class="" />
       </router-link>
 
     </v-toolbar-title>

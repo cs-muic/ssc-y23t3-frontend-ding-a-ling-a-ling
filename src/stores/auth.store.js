@@ -31,7 +31,7 @@ export const useAuthStore = defineStore({
           console.log('Logged in successfully')
 
           // Redirect to user page(the default logged int page).
-          router.push('/user')
+          router.push('/user/match')
         } else {
           console.error('No token received from server')
           alert('Failed to log in, no token received')
@@ -44,11 +44,11 @@ export const useAuthStore = defineStore({
         alert(`Sign-In failed: Invalid email or password.`)
       }
     },
-    logout () {
+    signOut () {
       this.user = null
       localStorage.removeItem('user')
       localStorage.removeItem('token')
-      router.push('/')
+      router.push('/home')
     },
   },
 })
