@@ -41,7 +41,6 @@
 </template>
 
 <script lang="ts" setup>
-import SignUpForm from '@/components/authorization/SignUpForm.vue'
 </script>
 
 <style scoped>

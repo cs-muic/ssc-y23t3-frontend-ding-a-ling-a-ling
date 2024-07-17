@@ -14,7 +14,7 @@ declare module 'vue' {
     Preloader: typeof import('./components/Preloader.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SignInForm: typeof import('./components/authorization/SignInForm.vue')['default']
-    SignUpForm: typeof import('./components/authorization/SignUpForm.vue')['default']
+    SignInForm: typeof import('./components/account/SignInForm.vue')['default']
+    SignUpForm: typeof import('./components/account/SignUpForm.vue')['default']
   }
 }

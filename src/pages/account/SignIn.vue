@@ -39,7 +39,6 @@
 </template>
 
 <script lang="ts" setup>
-import SignInForm from '@/components/authorization/SignInForm.vue'
 </script>
 
 <style scoped>
