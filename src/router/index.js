@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import { useAlertStore, useAuthStore } from '@/stores'
 // import { Home } from '@/views'
 import userRoutes from './user.routes'
 import homeRoutes from './home.routes'
@@ -16,15 +15,12 @@ export const router = createRouter({
 })
 
 router.beforeEach(async to => {
-  const alertStore = useAlertStore()
-  alertStore.clear()
-
   const publicPages = ['/', '/home', '/signin', '/signup']
   const authRequired = !publicPages.includes(to.path)
-  const authStore = useAuthStore()
+  const isLoggedIn = !!localStorage.getItem('user')
+  
 
-  if (authRequired && !authStore.user) {
-    authStore.returnUrl = to.fullPath
+  if (authRequired && !isLoggedIn) {
     return '/'
   }
 })

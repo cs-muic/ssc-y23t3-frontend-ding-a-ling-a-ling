@@ -1,5 +1,5 @@
 <template>
-  <v-form @submit.prevent="handleSignUp">
+  <v-form @submit.prevent="onSubmit">
 
     <v-card
       color="white"
@@ -176,12 +176,10 @@
 </template>
 
 <script>
-import apiClient from '@/axiosConfig' // Import the Axios configuration
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
-  name: 'SignUp',
 
   setup: function () {
     const router = useRouter()
@@ -225,7 +223,7 @@ export default {
       alert(`Getting preferences and dislikes failed:: ${error.response ? error.response.data.message : 'Network or server error'}`)
     }
 
-    const handleSignUp = async () => {
+    const onSubmit = async () => {
       try {
         const response = await apiClient.post('/signup', {
           firstName: firstName.value,
@@ -251,7 +249,7 @@ export default {
           localStorage.setItem('token', token) // Store the token
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}` // Set default header
           console.log('Signed up successfully')
-          await router.push('/matching') // Redirect to matching page
+          await router.push('/user') // Redirect to matching page
         } else {
           console.error('No token received from server')
           alert('Failed to sign up, no token received')
@@ -278,8 +276,8 @@ export default {
       dislikes,
       preferences,
       username,
-      handleSignUp,
       dislikeOptions,
+      onSubmit,
       preferenceOptions
     }
   }

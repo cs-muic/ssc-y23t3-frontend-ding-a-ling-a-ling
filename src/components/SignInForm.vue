@@ -37,7 +37,6 @@ export default {
 
     const handleSignIn = async () => {
       try {
-
         const formData = new FormData();
         formData.append('email', email.value);
         formData.append('password', password.value);
@@ -49,17 +48,16 @@ export default {
 
         if (token) {
           localStorage.setItem('token', token); // Store the token
+          useRouter
           console.log("token in use" + localStorage.getItem('token'));
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`; // Set default header
           console.log(response)
           await router.push('/index'); // Redirect to matching page
         } else {
           console.error('No token received from server');
-          alert('Failed to log in, no token received');
         }
       } catch (error) {
         console.error('Login failed:', error.response ? error.response.data : error);
-        alert("Login failed: Invalid email or password.");
       }
     };
     return { email, password, handleSignIn };
