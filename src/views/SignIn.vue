@@ -1,5 +1,4 @@
 <template>
-  <v-container class="">
     <div class="content">
       <v-card color="primary" variant="flat"
         class="border-thin mb-5 align-center border-radius border-thin w-100 h-100 my-auto px-8 overflow-hidden"
@@ -33,7 +32,6 @@
         </div>
       </v-card>
     </div>
-  </v-container>
 
 </template>
 

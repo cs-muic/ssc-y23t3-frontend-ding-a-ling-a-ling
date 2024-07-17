@@ -1,5 +1,4 @@
 <template >
-  <v-container class="overflow-scroll">
     <div class="content">
       <v-card color="primary" variant="flat" class="border-radius border-thin mb-5 " id="top">
         <div>
@@ -32,7 +31,6 @@
       </v-card>
       <SignUpForm />
     </div>
-  </v-container>
 </template>
 
 <script lang="ts" setup>
@@ -56,6 +54,8 @@ hr {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
+
+
 
 #annotation {
   border-color: rgba(255, 255, 255, 0.5);

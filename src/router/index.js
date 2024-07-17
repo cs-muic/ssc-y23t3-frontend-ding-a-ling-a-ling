@@ -30,6 +30,23 @@ router.beforeEach(async to => {
   }
 })
 
+router.beforeEach((to, from, next) => {
+  const meta = to.meta
+  const body = document.body
+  const html = document.documentElement
+
+  if (meta?.overflow) {
+    // body.style.overflow = 'hidden'
+    html.style.overflow = 'hidden'
+    window.scrollTo(0, 0) // Scroll to top
+  } else {
+    // body.style.overflow = ''
+    html.style.overflow = ''
+  }
+
+  next()
+})
+
 router.isReady().then(() => {
   localStorage.removeItem('vuetify:dynamic-reload')
 })

@@ -10,7 +10,8 @@ declare module 'vue' {
     Alert: typeof import('./components/Alert.vue')['default']
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppHeader: typeof import('./components/AppHeader.vue')['default']
-    copy: typeof import('./components/HeroHomeCard copy.vue')['default']
+    copy: typeof import('./components/user/UserMatchCard copy.vue')['default']
+    EditProfile: typeof import('./components/user/EditProfile.vue')['default']
     FormTitleCards: typeof import('./components/FormTitleCards.vue')['default']
     HeroHomeCard: typeof import('./components/HeroHomeCard.vue')['default']
     HomeFooter: typeof import('./components/HomeFooter.vue')['default']
@@ -21,8 +22,10 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SignInForm: typeof import('./components/SignInForm.vue')['default']
     SignUpForm: typeof import('./components/SignUpForm.vue')['default']
+    UserEditProfile: typeof import('./components/user/UserEditProfile.vue')['default']
     UserFooter: typeof import('./components/user/UserFooter.vue')['default']
     UserHeader: typeof import('./components/user/UserHeader.vue')['default']
     UserMatchCard: typeof import('./components/user/UserMatchCard.vue')['default']
+    UserProfile: typeof import('./components/user/UserProfile.vue')['default']
   }
 }

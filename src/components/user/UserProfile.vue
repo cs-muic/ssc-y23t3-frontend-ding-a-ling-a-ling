@@ -14,7 +14,7 @@ export default {
 
       <v-card-item>
         <div class="text-h6 font-weight-regular text-center text-capitalize">
-          Your Matches
+         Your Profile
         </div>
         <div class="mb-4"></div>
 
@@ -29,7 +29,17 @@ export default {
           <div class="card-panel">8</div>
         </Flicking>
 
+      </v-card-item>
 
+      <v-card-item>
+        <div class="w-100 d-flex">
+            <v-btn  variant="flat" class="rounded-pill mx-auto border-thin text-lg" to="edit">
+              <v-icon>
+              mdi-pencil
+            </v-icon>
+            <span>edit</span>
+            </v-btn>
+        </div>
       </v-card-item>
 
       <div class="mb-7"></div>

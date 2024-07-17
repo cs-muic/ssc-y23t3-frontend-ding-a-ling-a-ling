@@ -5,8 +5,8 @@ export default {
   component: Layout,
   children: [
     { path: '', redirect: 'match' },
-    { path: 'match', component: Match },
+    { path: 'match', component: Match, meta: { overflow: 'hidden' } },
     { path: 'edit', component: Edit },
-    { path: 'profile', component: Profile },
+    { path: 'profile', component: Profile, meta: { overflow: 'hidden' } },
   ],
 }
