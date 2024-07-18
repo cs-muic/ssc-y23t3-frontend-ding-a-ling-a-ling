@@ -10,7 +10,8 @@ export default {
     const firstName = ref('')
     const lastName = ref('')
     const email = ref('')
-    const password = ref('')
+     const password = ref('')
+    const confirmPassword = ref('')
     const username = ref('')
     const address = ref('')
     const phoneNumber = ref('')
@@ -49,6 +50,11 @@ export default {
 
     const onSubmit = async () => {
       try {
+        if (password.value !== confirmPassword.value) {
+          alert('Passwords do not match');
+          return;
+        }
+
         const response = await apiClient.post('/signup', {
           firstName: firstName.value,
           lastName: lastName.value,
@@ -66,18 +72,23 @@ export default {
           dislikes: dislikes.value,
           preferences: preferences.value
         })
+
         console.log('Sign Up response:', response.data) // Logging response data
+
         // grabbing the token back from the server (which will be in local storage)
         const { token } = response.data;
+
         if (token) {
           localStorage.setItem('token', token) // Store the token
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}` // Set default header
           console.log('Signed up successfully')
           await router.push('/user') // Redirect to matching page
+
         } else {
           console.error('No token received from server')
           alert('Failed to sign up, no token received')
         }
+
       } catch (error) {
         console.error('Signup failed:', error.response ? error.response.data : error)
         alert(`Signup failed: ${error.response ? error.response.data.message : 'Network or server error'}`)
@@ -101,6 +112,7 @@ export default {
       preferences,
       username,
       dislikeOptions,
+      confirmPassword,
       onSubmit,
       preferenceOptions
     }

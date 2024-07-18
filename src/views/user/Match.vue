@@ -4,7 +4,7 @@
   <div class="content d-flex h-100 w-100 justify-center align-center">
     <div class="trigger-left">
     </div>
-      <v-card class="bg-white w-100 h-100"></v-card>
+      <v-card class="bg-white w-50 h-75"></v-card>
     <div class="trigger-right">
     </div>
   </div>
@@ -15,6 +15,23 @@
 </script>
 
 <style scoped>
+
+trigger-left, trigger-right {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: black;
+    position: absolute;
+    z-index: 999;
+}
+
+trigger-left {
+  left: 0;
+}
+
+trigger-right {
+  right: 0;
+}
 .content {
   padding-top: 70px;
   padding-right: 80px;
@@ -47,7 +64,7 @@ h1 {
 }
 
 .cursor{
-    background: rgba(256, 256, 256, 0.0);
+    background: rgba(255, 214, 214, 0.0);
     top: 0;
     width: 40px;
     height: 40px;
@@ -56,11 +73,11 @@ h1 {
     border-style: solid;
     backdrop-filter: blur(10px);
     border-width: 1px;
-    border-color: rgba(256, 256, 256);
+    border-color: rgba(256, 256, 256, 1.0);
 }
 
 .cursor2 {
-    background: rgba(256, 256, 256, 0.5);
+    background: rgba(255, 214, 214, 0.0);
     top: -8px;
     left: -8px;
     width: 16px;
@@ -118,33 +135,33 @@ export default {
     gsap.to(cursor2, 0.2, {x: mouseX, y:mouseY})
   })
 
-  title.addEventListener('mouseenter', () => {
-    gsap.to(hand, 1, {
-        scale: 1,
-        opacity: 1,
-        top: '-75px',
-        left: '-75px',
-        rotate: 0,
-        ease: Elastic.easeOut.config(1, 0.3)
-    })
-  })
+  // title.addEventListener('mouseenter', () => {
+  //  gsap.to(hand, 1, {
+  //       scale: 1,
+  //       opacity: 1,
+  //       top: '-75px',
+  //       left: '-75px',
+  //       rotate: 0,
+  //       ease: Elastic.easeOut.config(1, 0.3)
+  //   })
+  // })
 
-  title.addEventListener('mousemove', () => {
-    gsap.to(hand, 1, {
-        x: mouseX,
-        y: mouseY
-    })
-  })
+  // title.addEventListener('mousemove', () => {
+  //   gsap.to(hand, 1, {
+  //       x: mouseX,
+  //       y: mouseY
+  //   })
+  // })
 
-  title.addEventListener('mouseleave', () => {
-    gsap.to(hand, 0.2, {
-        scale: 0,
-        opacity: 0,
-        top: '10',
-        left: '40',
-        rotate: 45,
-    })
-  })
+  // title.addEventListener('mouseleave', () => {
+  //   gsap.to(hand, 0.2, {
+  //       scale: 0,
+  //       opacity: 0,
+  //       top: '10',
+  //       left: '40',
+  //       rotate: 45,
+  //   })
+  // })
   },
 };
 
