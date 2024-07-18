@@ -7,7 +7,18 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
+import apiClient from '@/axiosConfig'
+import { ref, onMounted } from 'vue';
+import { router } from '@/router'
+import { useAuthStore } from '@/stores';
+
+export default {
+  setup() {
+  },
+}
+
+
 </script>
 
 <style scoped>
