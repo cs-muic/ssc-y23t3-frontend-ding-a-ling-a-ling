@@ -8,11 +8,13 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@egjs/vue3-flicking": "^4.11.3",
     "@mdi/font": "7.4.47",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
     "axios": "^1.7.2",
     "core-js": "^3.37.1",
+    "p5vue": "^0.0.7",
     "roboto-fontface": "*",
     "vee-validate": "^4.13.2",
     "vite-plugin-require": "^1.2.14",

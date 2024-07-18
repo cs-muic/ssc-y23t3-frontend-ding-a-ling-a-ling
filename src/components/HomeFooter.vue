@@ -16,9 +16,6 @@
       —
       <a
         class="text-caption text-decoration-none on-surface pr-4"
-        href="/public"
-        rel="noopener noreferrer"
-        target="_blank"
       >
       DingALingALing
       </a>

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // import { Home } from '@/views'
+import { useAuthStore } from '@/stores'
 import userRoutes from './user.routes'
 import homeRoutes from './home.routes'
 
@@ -8,7 +9,10 @@ export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   linkActiveClass: 'active',
   routes: [
+    // Home views = landing page, sign in, sign up
     { ...homeRoutes },
+
+    // User views = match, edit, profile
     { ...userRoutes },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
@@ -17,12 +21,30 @@ export const router = createRouter({
 router.beforeEach(async to => {
   const publicPages = ['/', '/home', '/signin', '/signup']
   const authRequired = !publicPages.includes(to.path)
-  const isLoggedIn = !!localStorage.getItem('user')
-  
+  const authStore = useAuthStore()
 
-  if (authRequired && !isLoggedIn) {
+  // redirect to login page if not logged in and trying to access a restricted page
+  if (authRequired && !authStore.user) {
+    authStore.returnUrl = to.fullPath
     return '/'
   }
+})
+
+router.beforeEach((to, from, next) => {
+  const meta = to.meta
+  const body = document.body
+  const html = document.documentElement
+
+  if (meta?.overflow) {
+    // body.style.overflow = 'hidden'
+    html.style.overflow = 'hidden'
+    window.scrollTo(0, 0) // Scroll to top
+  } else {
+    // body.style.overflow = ''
+    html.style.overflow = ''
+  }
+
+  next()
 })
 
 router.isReady().then(() => {

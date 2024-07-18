@@ -1,6 +1,6 @@
 <template>
   <div class="content d-flex justify-center align-center">
-<!--    <HeroHomeCard/>-->
+   <UserProfile/>
   </div>
 </template>
 

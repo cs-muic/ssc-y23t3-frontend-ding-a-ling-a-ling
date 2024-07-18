@@ -1,6 +1,6 @@
 <template>
   <div class="content d-flex justify-center align-center">
-<!--    <HeroHomeCard/>-->
+   <UserEditProfile/>
   </div>
 </template>
 
@@ -8,6 +8,8 @@
 </script>
 
 <style scoped>
+
+
  .content {
    padding-top: 70px;
    padding-right: 80px;

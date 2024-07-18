@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Sketch from './Sketch.vue';
+
 
 </script>
 
@@ -21,6 +23,8 @@
           Start Finding Love
         </v-btn>
     </div>
+
+    <Sketch />
 
     <div
       class="w-100 d-inline-flex  mt-auto bottom-0 mx-auto mt-auto text-center text-lg-body-1 text-caption text-break"

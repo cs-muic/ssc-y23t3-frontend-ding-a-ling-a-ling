@@ -4,8 +4,9 @@ export default {
   path: '/user',
   component: Layout,
   children: [
-    { path: '', component: Match },
+    { path: '', redirect: 'match' },
+    { path: 'match', component: Match, meta: { overflow: 'hidden' } },
     { path: 'edit', component: Edit },
-    { path: 'profile', component: Profile },
+    { path: 'profile', component: Profile, meta: { overflow: 'hidden' } },
   ],
 }
