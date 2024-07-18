@@ -20,10 +20,10 @@ defineProps({
     <v-card max-width="700" class=" rounded-lg border mb-4">
       <v-card-item class="">
         <div class="text-primary text-h5 font-weight-medium text-center">
-          Today's Matches
+          Your Profile
         </div>
         <div class="text-primary text-caption font-weight-regular text-center my-0">
-          {{ displayName }} hates the same things.
+          You can edit your profile below.
         </div>
       </v-card-item>
     </v-card>
@@ -36,7 +36,7 @@ defineProps({
       <v-container class="m-0 pt-5">
         <div>
           <div class="text-h5 font-weight-medium">
-            {{ displayName }} {{ age }}
+            {{ displayName }}
           </div>
           <hr>
           <div class="mb-3"></div>
@@ -45,30 +45,21 @@ defineProps({
             {{ biography }}
           </div>
 
+          <div class="w-100 d-flex">
+            <v-btn variant="flat" class="rounded-pill mx-auto border-thin text-lg" to="edit">
+              <v-icon>
+                mdi-pencil
+              </v-icon>
+              <span>edit</span>
+            </v-btn>
+          </div>
+
           <div class="mb-3"></div>
 
-          <div class="text-caption text-center">
-            {{ contacts }}
-          </div>
         </div>
       </v-container>
-    </v-card>
-    <v-card max-width="700" class="mt-2 rounded-lg border">
-      <v-card-item class="text-caption font-weight-medium text-center">
-        What They Hate
-      </v-card-item>
-      <hr>
-      <v-card-item class="">
-        <v-row>
-          <v-col cols="12">
-            <v-chip v-for="(dislike, index) in dislikes" :key="index" class="ma-2 hate-text font-weight-regular">
-              {{ dislike }}
-            </v-chip>
-          </v-col>
-        </v-row>
-      </v-card-item>
-    </v-card>
 
+    </v-card>
 
   </div>
 </template>

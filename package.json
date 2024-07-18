@@ -15,6 +15,7 @@
     "axios": "^1.7.2",
     "core-js": "^3.37.1",
     "gsap": "^3.12.5",
+    "jwt-decode": "^4.0.0",
     "p5vue": "^0.0.7",
     "roboto-fontface": "*",
     "vee-validate": "^4.13.2",

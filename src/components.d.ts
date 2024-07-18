@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./components/user/UserMatchCard copy.vue')['default']
     FormTitleCards: typeof import('./components/FormTitleCards.vue')['default']
     HeroHomeCard: typeof import('./components/HeroHomeCard.vue')['default']
     HomeFooter: typeof import('./components/HomeFooter.vue')['default']
@@ -21,5 +22,6 @@ declare module 'vue' {
     UserHeader: typeof import('./components/user/UserHeader.vue')['default']
     UserMatchCard: typeof import('./components/user/UserMatchCard.vue')['default']
     UserProfile: typeof import('./components/user/UserProfile.vue')['default']
+    UserProfileCard: typeof import('./components/user/UserProfileCard.vue')['default']
   }
 }

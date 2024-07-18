@@ -13,47 +13,47 @@ import { gsap } from "gsap";
 // })
 
 const displayName = "Austin";
-const biography = "I am a cool guy";
+const biography = "Weerapong is a Bitch";
 const age = 22;
 const contacts = "Im in your walls come find me";
 const imgSrc = "https://i.ytimg.com/vi/P9XSpiWZztY/maxresdefault.jpg";
 const dislikes = ["and your mom", "you"];
 
 export default {
-  // import apiClient from '@/axiosConfig';
-
-  // apiClient.get('/matches/amount', {
-  //   headers: {
-  //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-  //   }
-  // }).then(response => {
-  //   console.log(response.data);
-  // }).catch(error => {
-  //   console.error(error);
-  // });
 
   async setup() {
     const counter = ref(0);
+    const token = localStorage.getItem("token");
+    const maxCount = ref(0);
 
-    const token = localStorage.getItem('token')
-    const maxCount = apiClient.get('/matches/amount', { params: { token: token } });
+    apiClient.get('/user/matches/amount', { params: { token: token } })
+      .then((response) => {
+        maxCount.value = parseInt(response.data, 10); // Ensure it's an integer
+        // console.log("Max count:", maxCount.value);
+      })
+      .catch((error) => {
+        console.error("Failed to retrieve maxCount:", error);
+      });
 
     function incrementCounter() {
-      counter.value = (counter.value + 1) % maxCount;
+      counter.value = (counter.value + 1) % maxCount.value;
+
+
       updateUserByGetRequest();
       console.log(counter.value);
     }
 
     function decrementCounter() {
-      counter.value = (counter.value - 1 + maxCount) % maxCount;
+      counter.value = (counter.value - 1 + maxCount.value) % maxCount.value;
       updateUserByGetRequest();
       console.log(counter.value);
     }
 
     function updateUserByGetRequest() {
-      apiClient.get("/user/matches").then((response) => {
-        console.log(response.data);
-      });
+      apiClient.get("/user/matchebyindex", { params: { token: token, index: counter.value } })
+        .then((response) => {
+          console.log(response.data);
+        });
     }
 
     return {

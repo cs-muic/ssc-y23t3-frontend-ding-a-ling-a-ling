@@ -16,24 +16,24 @@ import { fileURLToPath, URL } from 'node:url'
 export default defineConfig({
   plugins: [
     VueRouter({
-      dts: 'src/typed-router.d.ts',
+      dts: "src/typed-router.d.ts",
     }),
     // Layouts(),
     AutoImport({
       imports: [
-        'vue',
+        "vue",
         {
-          'vue-router/auto': ['useRoute', 'useRouter'],
+          "vue-router/auto": ["useRoute", "useRouter"],
         },
       ],
-      dts: 'src/auto-imports.d.ts',
+      dts: "src/auto-imports.d.ts",
       eslintrc: {
         enabled: true,
       },
       vueTemplate: true,
     }),
     Components({
-      dts: 'src/components.d.ts',
+      dts: "src/components.d.ts",
     }),
     Vue({
       template: { transformAssetUrls },
@@ -45,34 +45,35 @@ export default defineConfig({
     Vuetify({
       autoImport: true,
       styles: {
-        configFile: 'src/styles/settings.scss',
+        configFile: "src/styles/settings.scss",
       },
     }),
     Fonts({
       google: {
-        families: [{
-          name: 'Rubik',
-          styles: 'wght@100;300;400;500;700;900',
-        }],
+        families: [
+          {
+            name: "Rubik",
+            styles: "wght@100;300;400;500;700;900",
+          },
+        ],
       },
     }),
   ],
-  define: { 'process.env': {} },
+  define: { "process.env": {} },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ],
+    extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
   server: {
     port: 3000,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080",
+        ws: true,
+        changeOrigin: true,
+      },
+    },
   },
-})
+});

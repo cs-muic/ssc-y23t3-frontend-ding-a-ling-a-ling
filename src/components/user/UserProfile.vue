@@ -1,82 +1,92 @@
 <script>
 import { ref, onMounted } from 'vue';
-import apiClient from '@/axiosConfig'
+import apiClient from '@/axiosConfig';
+import { jwtDecode } from 'jwt-decode';
+import UserProfileCard from './UserProfileCard.vue';
 
 export default {
   setup() {
-    const currentUser = ref({});
+    // Parse the user object from local storage
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log('User from localStorage:', user);
+
+    const username = ref('');
+    const profileData = ref({
+      displayName: '',
+      profilePicture: '',
+      contact: '',
+      biography: '',
+      base64Image: '', // Added field for base64 image
+    });
+
+    if (user && user.token) {
+      const decodedToken = jwtDecode(user.token);
+      console.log('Decoded Token:', decodedToken);
+      username.value = decodedToken.sub;  // Assuming the username is stored in the 'sub' claim
+    }
+
+    console.log('Parsed username:', username.value);
 
     const loadProfile = async () => {
-      const token = localStorage.getItem('token');
+      const token = user ? user.token : '';
+      console.log('Token:', token);
+
+      // Check token and set Authorization header
       if (token) {
         apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      } else {
+        console.error('No token found');
+        return;
       }
 
       try {
-        const response = await apiClient.get('/profile');
-        currentUser.value = response.data;
+        // Log the request payload
+        const payload = { username: username.value };
+        console.log('Request payload:', payload);
+
+        const response = await apiClient.post('/user/profile', null, {
+          params: payload
+        });
+        console.log('Profile response:', response.data);
+        const data = response.data;
+
+        // Update the profileData ref with the response data
+        profileData.value = data;
+        loadImage(); // Load image after profile data is loaded
       } catch (error) {
         console.error('Failed to load profile:', error.response ? error.response.data : error);
         alert(`Failed to load profile: ${error.response ? error.response.data.message : 'Network or server error'}`);
       }
     };
 
+    const loadImage = async () => {
+      try {
+        const response = await apiClient.get('/user/images', {
+          params: { username: username.value }
+        });
+        console.log('Image response:', response.data);
+        profileData.value.base64Image = response.data;
+      } catch (error) {
+        console.error('Failed to load image:', error.response ? error.response.data : error);
+        alert(`Failed to load image: ${error.response ? error.response.data.message : 'Network or server error'}`);
+      }
+    };
+
     onMounted(loadProfile);
 
     return {
-      currentUser,
+      username,
+      profileData,
     };
   },
 };
 </script>
 
 <template>
-  <v-card color="primary" variant="flat" class="border-radius border-thin w-100 h-100 my-auto px-8">
-    <div class="mb-12"></div>
 
-    <v-card-item>
-      <div class="text-h6 font-weight-regular text-center text-capitalize">
-        Your Profile
-      </div>
-      <div class="mb-4"></div>
-      <div>
-        <div class="text-h5 font-weight-bold text-center">
-          {{ currentUser.displayName }}
-        </div>
-        <div class="mb-4"></div>
-        <v-avatar size="150" class="mx-auto">
-          <img :src="currentUser.profilePicture" alt="Profile Picture">
-        </v-avatar>
-        <div class="mb-4"></div>
-        <div class="text-h6 font-weight-regular">
-          Contacts:
-        </div>
-        <div>
-          {{ currentUser.contact }}
-        </div>
-        <div class="mb-4"></div>
-        <div class="text-h6 font-weight-regular">
-          Biography:
-        </div>
-        <div>
-          {{ currentUser.biography }}
-        </div>
-      </div>
-    </v-card-item>
+  <UserProfileCard v-bind:displayName="profileData.displayName" v-bind:biography="profileData.biography" v-bind:age="age"
+    v-bind:contacts="profileData.contact" v-bind:imgSrc="`data:image/png;base64,${profileData.base64Image}`" v-bind:dislikes="dislikes" />
 
-    <v-card-item>
-      <div class="w-100 d-flex">
-        <v-btn variant="flat" class="rounded-pill mx-auto border-thin text-lg" to="edit">
-          <v-icon>
-            mdi-pencil
-          </v-icon>
-          <span>edit</span>
-        </v-btn>
-      </div>
-    </v-card-item>
-
-    <div class="mb-7"></div>
-  </v-card>
 </template>
 
 <style scoped>

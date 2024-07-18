@@ -1,24 +1,24 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import apiClient from '@/axiosConfig';
-
+import * as Yup from 'yup';
+import apiClient from "@/axiosConfig";
 
 export default {
+
   setup: function () {
     const router = useRouter()
     const firstName = ref('')
     const lastName = ref('')
     const email = ref('')
-     const password = ref('')
-    const confirmPassword = ref('')
+    const password = ref('')
     const username = ref('')
     const address = ref('')
     const phoneNumber = ref('')
     const age = ref(null)
     const height = ref(null)
     const displayName = ref('')
-    const profilePicture = ref('')
+    const profilePicture = ref(null)
     const contact = ref('')
     const biography = ref('')
     const dislikes = ref([])
@@ -50,45 +50,36 @@ export default {
 
     const onSubmit = async () => {
       try {
-        if (password.value !== confirmPassword.value) {
-          alert('Passwords do not match');
-          return;
-        }
+        const formData = new FormData();
+        formData.append('firstName', firstName.value)
+        formData.append('lastName', lastName.value)
+        formData.append('email', email.value)
+        formData.append('password', password.value)
+        formData.append('username', username.value)
+        formData.append('address', address.value)
+        formData.append('phoneNumber', phoneNumber.value)
+        formData.append('age', age.value)
+        formData.append('height', height.value)
+        formData.append('displayName', displayName.value)
+        formData.append('profilePicture', profilePicture.value)
+        formData.append('contact', contact.value)
+        formData.append('biography', biography.value)
+        formData.append('dislikes', dislikes.value)
+        formData.append('preferences', preferences.value)
 
-        const response = await apiClient.post('/signup', {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          email: email.value,
-          password: password.value,
-          username: username.value,
-          address: address.value,
-          phoneNumber: phoneNumber.value,
-          age: age.value,
-          height: height.value,
-          displayName: displayName.value,
-          profilePicture: profilePicture.value,
-          contact: contact.value,
-          biography: biography.value,
-          dislikes: dislikes.value,
-          preferences: preferences.value
-        })
-
+        const response = await apiClient.post('/signup', formData)
         console.log('Sign Up response:', response.data) // Logging response data
-
         // grabbing the token back from the server (which will be in local storage)
         const { token } = response.data;
-
         if (token) {
           localStorage.setItem('token', token) // Store the token
           apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}` // Set default header
           console.log('Signed up successfully')
           await router.push('/user') // Redirect to matching page
-
         } else {
           console.error('No token received from server')
           alert('Failed to sign up, no token received')
         }
-
       } catch (error) {
         console.error('Signup failed:', error.response ? error.response.data : error)
         alert(`Signup failed: ${error.response ? error.response.data.message : 'Network or server error'}`)
@@ -112,7 +103,6 @@ export default {
       preferences,
       username,
       dislikeOptions,
-      confirmPassword,
       onSubmit,
       preferenceOptions
     }
@@ -267,11 +257,11 @@ export default {
 </template>
 
 <style scoped>
-
 #btm {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
-
 </style>
 
+message.txt
+10 KB
