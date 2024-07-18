@@ -14,8 +14,8 @@ export const useAuthStore = defineStore({
     async signIn (username, password) {
       try {
         const response = await apiClient.post('/signin', {
-          username: username.value,
-          password: password.value,
+          username,
+          password,
         })
         const { token } = response.data
         if (token) {
@@ -30,7 +30,8 @@ export const useAuthStore = defineStore({
           console.log('token in use' + localStorage.getItem('token'))
           console.log('Logged in successfully')
 
-          // Redirect to user page(the default logged int page).
+          // Redirect to user page(the default log in page).
+          // router.push('/user/match')
           router.push('/user/match')
         } else {
           console.error('No token received from server')
@@ -48,7 +49,7 @@ export const useAuthStore = defineStore({
       this.user = null
       localStorage.removeItem('user')
       localStorage.removeItem('token')
-      router.push('/home')
+      router.push('/')
     },
   },
 })

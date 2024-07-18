@@ -18,33 +18,31 @@ export const router = createRouter({
   ],
 })
 
-router.beforeEach(async to => {
+router.beforeEach(async (to, from, next) => {
   const publicPages = ['/', '/home', '/signin', '/signup']
   const authRequired = !publicPages.includes(to.path)
   const authStore = useAuthStore()
 
-  // redirect to login page if not logged in and trying to access a restricted page
+  // Redirect to login page if not logged in and trying to access a restricted page
   if (authRequired && !authStore.user) {
     authStore.returnUrl = to.fullPath
-    return '/'
+    return next('/') // Use next for redirection
   }
-})
 
-router.beforeEach((to, from, next) => {
   const meta = to.meta
-  // const body = document.body
   const html = document.documentElement
 
+  // Apply overflow style based on route meta
   if (meta?.overflow) {
-    // body.style.overflow = 'hidden'
     html.style.overflow = 'hidden'
-    window.scrollTo(0, 0) // Scroll to top
   } else {
-    // body.style.overflow = ''
     html.style.overflow = ''
   }
-  window.scrollTo(0, 0) // Scroll to top
-  next()
+
+  // Scroll to top
+  window.scrollTo(0, 0)
+
+  next() // Proceed with the navigation
 })
 
 router.isReady().then(() => {

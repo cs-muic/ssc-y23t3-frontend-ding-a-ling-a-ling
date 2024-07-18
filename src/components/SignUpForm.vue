@@ -1,10 +1,10 @@
 <script>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import * as Yup from 'yup';
+import apiClient from '@/axiosConfig';
+
 
 export default {
-
   setup: function () {
     const router = useRouter()
     const firstName = ref('')

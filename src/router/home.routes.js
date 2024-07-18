@@ -1,5 +1,4 @@
 import { Home, Layout, SignIn, SignUp } from '@/views'
-// import { meta } from '@typescript-eslint/eslint-plugin'
 
 export default {
   path: '/',
