@@ -2,49 +2,50 @@
 import apiClient from 'axios'
 import { ref } from 'vue'
 
-// apiClient.get('/matches')
-//   .then(response => {
-//     console.log(response.data)
-//   })
-//   .catch(error => {
-//     console.error('Failed to get matches:', error.response ? error.response.data : error)
-//     alert(`Failed to get matches: ${error.response ? error.response.data.message : 'Network or server error'}`)
-//   }
+</script>
+
+<script setup>
+import { ref } from 'vue'
+  defineProps({
+    displayName: String,
+    biography: String,
+    age: Number,
+    contacts: String,
+    imgSrc: String,
+    dislikes: Array,
+  })
 </script>
 
 <template>
-  <v-container class="w-lg-50">
-    <div class="d-flex justify-center ga-3">
+  <v-card max-width="500" class="w-100">
+    <v-container>
+      <img class="profile-picture" src="https://i.ytimg.com/vi/P9XSpiWZztY/maxresdefault.jpg" alt="Google Photos" />
+    </v-container>
+    <v-container class="mt-0">
       <div>
-        <v-btn variant="flat" class="px-1 rounded-pill border-thin text-lg" to="signup">
-          <v-icon>
-            mdi-arrow-left
-          </v-icon>
-        </v-btn>
+        <div class="text-h5">
+          {{ displayName }} {{ age }}
+        </div>
+        <div>
+          <div class="text-h6">
+            {{ dislikes }}
+          </div>
+          <div class="text-h6">
+            {{ contacts }}
+          </div>
+          <div class="text-h6">
+            {{ age }}
+          </div>
 
-        <a href="signup" class="text-decoration-none">
-          <v-btn variant="flat" class="rounded-pill  border-thin text-lg">
-            <v-icon>
-              mdi-arrow-left
-            </v-icon>
-          </v-btn>
-        </a>
+          <div class="text-h5">
+            {{ biography }}
+          </div>
+        </div>
       </div>
-      <div class="flex">
-        <v-card color="white" variant="flat" class=" border-radius border-thin w-100 h-100 my-auto px-8">
-          <div class="mb-6"></div>
-        </v-card>
-      </div>
-      <div>
-        <v-btn variant="flat" class="rounded-pill  border-thin text-lg" to="signup">
-          <v-icon>
-            mdi-arrow-right
-          </v-icon>
-        </v-btn>
-      </div>
-    </div>
+    </v-container>
 
-  </v-container>
+  </v-card>
+
 </template>
 
 <style scoped>
@@ -55,6 +56,13 @@ import { ref } from 'vue'
 #annotation {
   border-color: rgba(255, 255, 255, 0.5);
   border-width: 0.5px;
+}
+
+.profile-picture {
+  object-fit: cover;
+  width: 100%;
+  height: 30vh;
+  border-radius: 2px;
 }
 
 /* @import url("node_modules/@egjs/vue3-flicking/dist/flicking.css"); */

@@ -14,6 +14,7 @@ export const router = createRouter({
 
     // User views = match, edit, profile
     { ...userRoutes },
+
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 })

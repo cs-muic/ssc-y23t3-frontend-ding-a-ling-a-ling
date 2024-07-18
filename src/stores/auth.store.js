@@ -49,7 +49,7 @@ export const useAuthStore = defineStore({
       this.user = null
       localStorage.removeItem('user')
       localStorage.removeItem('token')
-      router.push('/')
+      router.push('/home')
     },
   },
 })
