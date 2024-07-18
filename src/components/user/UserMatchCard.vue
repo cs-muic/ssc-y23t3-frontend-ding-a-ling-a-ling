@@ -13,29 +13,38 @@ import { ref } from 'vue'
 </script>
 
 <template>
-  <v-container>
-    <v-col class="">
+  <v-container class="w-lg-50">
+    <div class="d-flex justify-center ga-3">
+      <div>
+        <v-btn variant="flat" class="px-1 rounded-pill border-thin text-lg" to="signup">
+          <v-icon>
+            mdi-arrow-left
+          </v-icon>
+        </v-btn>
 
-
-    </v-col>
-<v-card color="primary" variant="flat" class=" border-radius border-thin w-100 h-100 my-auto px-8">
-    <div class="mb-6"></div>
-
-    <v-card-item>
-      <div class="text-h6 font-weight-regular text-center text-capitalize">
-        Your Matches
+        <a href="signup" class="text-decoration-none">
+          <v-btn variant="flat" class="rounded-pill  border-thin text-lg">
+            <v-icon>
+              mdi-arrow-left
+            </v-icon>
+          </v-btn>
+        </a>
       </div>
-      <div class="mb-4"></div>
-    </v-card-item>
+      <div class="flex">
+        <v-card color="white" variant="flat" class=" border-radius border-thin w-100 h-100 my-auto px-8">
+          <div class="mb-6"></div>
+        </v-card>
+      </div>
+      <div>
+        <v-btn variant="flat" class="rounded-pill  border-thin text-lg" to="signup">
+          <v-icon>
+            mdi-arrow-right
+          </v-icon>
+        </v-btn>
+      </div>
+    </div>
 
-    <v-card-item>
-      <div>{{ displayName }}</div>
-    </v-card-item>
-
-
-    <div class="mb-7"></div>
-  </v-card>
-</v-container>
+  </v-container>
 </template>
 
 <style scoped>

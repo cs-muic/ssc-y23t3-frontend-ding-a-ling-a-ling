@@ -64,8 +64,8 @@
 <style scoped>
     #nav {
     z-index: 999;
-    backdrop-filter: blur(20px);
+    /* backdrop-filter: blur(20px); */
     position: fixed;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255);
     }
 </style>
