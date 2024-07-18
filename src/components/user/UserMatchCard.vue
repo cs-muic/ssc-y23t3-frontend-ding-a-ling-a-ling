@@ -9,31 +9,41 @@ export default {
 </script>
 
 <template>
-    <v-card color="primary" variant="flat" class=" border-radius border-thin w-100 h-100 my-auto px-8">
-      <div class="mb-12"></div>
-
-      <v-card-item>
-        <div class="text-h6 font-weight-regular text-center text-capitalize">
-          Your Matches
-        </div>
-        <div class="mb-4"></div>
-
-        <Flicking :options="{ align: 'prev', circular: true }" @move-end="onMoveEnd">
-          <div class="card-panel">1</div>
-          <div class="card-panel">2</div>
-          <div class="card-panel">3</div>
-          <div class="card-panel">4</div>
-          <div class="card-panel">5</div>
-          <div class="card-panel">6</div>
-          <div class="card-panel">7</div>
-          <div class="card-panel">8</div>
-        </Flicking>
+  <v-container>
+    <v-col class="">
 
 
-      </v-card-item>
+    </v-col>
+<v-card color="primary" variant="flat" class=" border-radius border-thin w-100 h-100 my-auto px-8">
+    <div class="mb-12"></div>
 
-      <div class="mb-7"></div>
-    </v-card>
+    <v-card-item>
+      <div class="text-h6 font-weight-regular text-center text-capitalize">
+        Your Matches
+      </div>
+      <div class="mb-4"></div>
+
+      <v-carousel>
+        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
+
+        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
+
+        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover>
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-card-title class="text-h6 font-weight-regular">Card with image</v-card-title>
+              <v-card-text>
+                <span class="text-h6 font-weight-regular">This is a card with a cover image.</span>
+              </v-card-text>
+            </v-col>
+          </v-row>
+        </v-carousel-item>
+      </v-carousel>
+
+    </v-card-item>
+    <div class="mb-7"></div>
+  </v-card>
+</v-container>
 </template>
 
 <style scoped>
