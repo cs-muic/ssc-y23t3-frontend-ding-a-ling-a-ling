@@ -133,8 +133,9 @@ export default {
 };
 </script>
 
+
 <template>
-  <v-form @submit.prevent="onSubmit">
+<v-form @submit.prevent="onSubmit">
     <v-card color="white" variant="flat" class="border-thin mb-5">
       <div>
         <v-card-item class="px-8">
@@ -153,7 +154,9 @@ export default {
       </div>
     </v-card>
 
-    <v-card color="white" variant="flat" class="border-thin mb-5">
+
+    <v-card color="white" variant="flat" class="
+ border-thin mb-5">
       <div>
         <v-card-item class="px-8">
           <div id="category" class="text-h6 border-b border-opacity-50 mb-5 mt-4 pb-2 text-primary">
@@ -167,23 +170,26 @@ export default {
               <v-text-field v-model="email" label="Email" type="email" required></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
-              <v-text-field v-model="password" label="Password" type="password"></v-text-field>
+              <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
-              <v-text-field v-model="confirmPassword" label="Confirm Password" type="password"></v-text-field>
+              <v-text-field v-model="confirmPassword" label="Confirm Password" type="password" required></v-text-field>
             </v-col>
           </v-row>
         </v-card-item>
       </div>
     </v-card>
 
-    <v-card color="white" variant="flat" class="border-thin mb-5">
+
+    <v-card color="white" variant="flat" class="
+ border-thin mb-5">
       <div>
         <v-card-item class="px-8">
           <div id="category" class="text-h6 border-b border-opacity-50 mb-5 mt-4 pb-2 text-primary">
             Profile
           </div>
           <v-row dense>
+
             <v-col cols="12" md="6">
               <v-text-field v-model="displayName" label="Display Name"></v-text-field>
             </v-col>
@@ -191,6 +197,7 @@ export default {
               <v-file-input accept="image/png, image/jpeg, image/bmp" prepend-icon="mdi-photo" v-model="profilePicture"
                 label="Profile Picture"></v-file-input>
             </v-col>
+
             <v-col cols="12" md="6">
               <v-text-field v-model="address" label="Address"></v-text-field>
             </v-col>
@@ -203,12 +210,15 @@ export default {
             <v-col cols="12" md="6">
               <v-text-field v-model="height" label="Height (cm)" type="number"></v-text-field>
             </v-col>
+
             <v-col cols="12">
               <v-textarea v-model="biography" label="Biography"></v-textarea>
             </v-col>
+
             <v-col cols="12">
               <v-text-field v-model="contact" label="Contact Information"></v-text-field>
             </v-col>
+
             <v-col cols="12">
               <v-select v-model="preferences" :items="preferenceOptions" label="Preferences" multiple></v-select>
             </v-col>
@@ -222,37 +232,52 @@ export default {
         <v-card-item class="px-8">
           <div class="mb-12"></div>
           <div class="text-h4 font-weight-bold text-center text-capitalize">Tell Us What You Hate</div>
+
           <div class="mb-4"></div>
-          <div class="text-h5 font-weight-light text-center">It's important to be honest for us to perform our magic.
+          <div class="text-h5 font-weight-light text-center">Its important to be honest for us to perform our magic.
           </div>
         </v-card-item>
         <v-card-item class="px-8">
+
           <v-row dense>
             <v-col cols="12">
+              <!--              <v-select v-model="dislikes" :items="dislikeOptions" label="Lifestyle" multiple ></v-select>-->
+              <!--              <v-select v-model="dislikes" :items="dislikeOptions" label="Hobbies" multiple ></v-select>-->
+              <!--              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>-->
+              <!--              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>-->
+              <!--              <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple ></v-select>-->
               <v-select v-model="dislikes" :items="dislikeOptions" label="What You Hate" multiple></v-select>
             </v-col>
           </v-row>
           <div class="mb-5"></div>
+
           <div class="d-flex mb-12">
             <v-btn variant="flat" height="50"
-              class="rounded-pill mx-auto flex font-weight-regular border-thin text-h5 px-8" type="submit">Save Changes
+              class="rounded-pill mx-auto flex font-weight-regular border-thin text-h5 px-8" type="submit"> Sign Up
             </v-btn>
           </div>
+
           <div
-            class="w-100 d-inline-flex mt-auto bottom-0 mx-auto mt-auto text-center text-lg-body-1 text-caption text-break">
-            <v-chip class="mx-auto text-break" id="annotation">Powered by the
-              <div class="d-inline-block mx-1"><span class="font-weight-bold">Hate</span><span
+            class="w-100 d-inline-flex  mt-auto bottom-0 mx-auto mt-auto text-center text-lg-body-1 text-caption text-break">
+            <v-chip class="mx-auto text-break" id="annotation"> Powered by the
+              <div class="d-inline-block mx-1"><span class="font-weight-bold"> Hate</span><span
                   class="font-weight-light">Matcher</span>™
               </div>
-              <span>world leading, patent pending, cutting edge hate matching technology.</span>
+              <span> world leading, patent pending, cutting edge hate matching technology.</span>
             </v-chip>
           </div>
+
           <div class="mb-8"></div>
         </v-card-item>
       </div>
+
+
     </v-card>
+
+
   </v-form>
 </template>
+
 
 <style scoped>
 #btm {

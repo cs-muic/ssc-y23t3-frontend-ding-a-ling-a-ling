@@ -14,6 +14,7 @@ const sketch = (p5) => {
 
   p5.draw = () => {
     // p5.background(220);
+    p5.clear();
 
     // Update and display particles
     for (let i = particles.length - 1; i >= 0; i--) {

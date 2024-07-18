@@ -32,7 +32,7 @@ router.beforeEach(async to => {
 
 router.beforeEach((to, from, next) => {
   const meta = to.meta
-  const body = document.body
+  // const body = document.body
   const html = document.documentElement
 
   if (meta?.overflow) {
@@ -43,7 +43,7 @@ router.beforeEach((to, from, next) => {
     // body.style.overflow = ''
     html.style.overflow = ''
   }
-
+  window.scrollTo(0, 0) // Scroll to top
   next()
 })
 

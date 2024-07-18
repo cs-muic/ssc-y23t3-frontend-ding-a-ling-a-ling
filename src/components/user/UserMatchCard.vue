@@ -1,11 +1,15 @@
 <script>
-import Flicking from "@egjs/vue3-flicking";
+import apiClient from 'axios'
+import { ref } from 'vue'
 
-export default {
-  components: {
-    Flicking: Flicking
-  }
-}
+// apiClient.get('/matches')
+//   .then(response => {
+//     console.log(response.data)
+//   })
+//   .catch(error => {
+//     console.error('Failed to get matches:', error.response ? error.response.data : error)
+//     alert(`Failed to get matches: ${error.response ? error.response.data.message : 'Network or server error'}`)
+//   }
 </script>
 
 <template>
@@ -15,32 +19,20 @@ export default {
 
     </v-col>
 <v-card color="primary" variant="flat" class=" border-radius border-thin w-100 h-100 my-auto px-8">
-    <div class="mb-12"></div>
+    <div class="mb-6"></div>
 
     <v-card-item>
       <div class="text-h6 font-weight-regular text-center text-capitalize">
         Your Matches
       </div>
       <div class="mb-4"></div>
-
-      <v-carousel>
-        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/docks.jpg" cover></v-carousel-item>
-
-        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg" cover></v-carousel-item>
-
-        <v-carousel-item src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" cover>
-          <v-row>
-            <v-col cols="12" md="6">
-              <v-card-title class="text-h6 font-weight-regular">Card with image</v-card-title>
-              <v-card-text>
-                <span class="text-h6 font-weight-regular">This is a card with a cover image.</span>
-              </v-card-text>
-            </v-col>
-          </v-row>
-        </v-carousel-item>
-      </v-carousel>
-
     </v-card-item>
+
+    <v-card-item>
+      <div>{{ displayName }}</div>
+    </v-card-item>
+
+
     <div class="mb-7"></div>
   </v-card>
 </v-container>
