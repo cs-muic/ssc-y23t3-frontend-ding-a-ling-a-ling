@@ -30,7 +30,7 @@ defineProps({
 
     <v-card max-width="700" class="rounded-lg border">
       <v-card-item class="mt-1 mb-0 pb-0">
-        <v-img class="rounded" aspect-ratio="4/3" cover :src="imgSrc"></v-img>
+        <v-img class="rounded" aspect-ratio="4/3" cover :src="`data:image/png;base64,${imgSrc}`"></v-img>
       </v-card-item>
 
       <v-container class="m-0 pt-5">

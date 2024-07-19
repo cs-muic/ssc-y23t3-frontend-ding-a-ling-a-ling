@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import apiClient from '@/axiosConfig'
+import {jwtDecode} from "jwt-decode";
 
 export default {
   setup() {
@@ -22,53 +23,32 @@ export default {
     const biography = ref('');
     const dislikes = ref([]);
     const preferences = ref([]);
+    const profileData = ref({
+      displayName: '',
+      profilePicture: '',
+      contact: '',
+      biography: '',
+      base64Image: '', // Added field for base64 image
+    });
 
     let preferenceOptions = [];
     let dislikeOptions = [];
 
-    const loadProfile = async () => {
-      try {
-        const response = await apiClient.get('/profile');
-        const data = response.data;
-        firstName.value = data.firstName;
-        lastName.value = data.lastName;
-        email.value = data.email;
-        username.value = data.username;
-        address.value = data.address;
-        phoneNumber.value = data.phoneNumber;
-        age.value = data.age;
-        height.value = data.height;
-        displayName.value = data.displayName;
-        profilePicture.value = data.profilePicture;
-        contact.value = data.contact;
-        biography.value = data.biography;
-        dislikes.value = data.dislikes;
-        preferences.value = data.preferences;
-      } catch (error) {
-        console.error('Failed to load profile:', error.response ? error.response.data : error);
-        alert(`Failed to load profile: ${error.response ? error.response.data.message : 'Network or server error'}`);
-      }
-    };
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log('User from localStorage:', user);
+
+    if (user && user.token) {
+      const decodedToken = jwtDecode(user.token);
+      console.log('Decoded Token:', decodedToken);
+      username.value = decodedToken.sub;  // Assuming the username is stored in the 'sub' claim
+    }
+
 
     onMounted(async () => {
-      await loadProfile();
 
       try {
         dislikeOptions = ['Option 1', 'Option 2'];
         preferenceOptions = ['Male', 'Female'];
-
-        if (false) {
-          preferenceOptions = await apiClient.get('/signup/preferences', {
-            params: {
-              category: 'preference',
-            },
-          });
-          dislikeOptions = await apiClient.get('/signup/dislikes', {
-            params: {
-              category: 'dislikes',
-            },
-          });
-        }
       } catch (error) {
         console.error('Getting preferences and dislikes failed:', error.response ? error.response.data : error);
         alert(`Getting preferences and dislikes failed: ${error.response ? error.response.data.message : 'Network or server error'}`);
@@ -80,31 +60,41 @@ export default {
         alert('Passwords do not match');
         return;
       }
+      const formData = new FormData();
+      formData.append('firstName', firstName.value);
+      formData.append('lastName', lastName.value);
+      formData.append('address', address.value);
+      formData.append('phoneNumber', phoneNumber.value);
+      formData.append('age', age.value);
+      formData.append('height', height.value);
+      formData.append('displayName', displayName.value);
+      formData.append('profilePicture', profilePicture.value);
+      formData.append('contact', contact.value);
+      formData.append('biography', biography.value);
+      formData.append('dislikes', dislikes.value);
+      formData.append('preferences', preferences.value);
 
       try {
-        const response = await apiClient.put('/profile', {
-          firstName: firstName.value,
-          lastName: lastName.value,
-          email: email.value,
-          password: password.value,
-          username: username.value,
-          address: address.value,
-          phoneNumber: phoneNumber.value,
-          age: age.value,
-          height: height.value,
-          displayName: displayName.value,
-          profilePicture: profilePicture.value,
-          contact: contact.value,
-          biography: biography.value,
-          dislikes: dislikes.value,
-          preferences: preferences.value,
-        });
+        const response = await apiClient.post('/user/update', formData);
         console.log('Profile update response:', response.data);
         alert('Profile updated successfully');
         await router.push('/user');
       } catch (error) {
         console.error('Profile update failed:', error.response ? error.response.data : error);
         alert(`Profile update failed: ${error.response ? error.response.data.message : 'Network or server error'}`);
+      }
+    };
+    const loadImage = async () => {
+      try {
+        const response = await apiClient.get('/user/images', {
+          params: { username: username.value }
+        });
+        console.log('Image response:', response.data);
+        profileData.value.base64Image = response.data;
+        profilePicture.value = profileData.value.base64Image;
+      } catch (error) {
+        console.error('Failed to load image:', error.response ? error.response.data : error);
+        alert(`Failed to load image: ${error.response ? error.response.data.message : 'Network or server error'}`);
       }
     };
 
@@ -127,6 +117,7 @@ export default {
       preferences,
       dislikeOptions,
       onSubmit,
+      loadImage,
       preferenceOptions,
     };
   },

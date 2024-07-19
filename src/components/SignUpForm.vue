@@ -30,19 +30,6 @@ export default {
     try {
       dislikeOptions = ['Option 1', 'Option 2']
       preferenceOptions = ['Male', 'Female']
-
-      if (false) {
-        preferenceOptions = apiClient.get('/signup/preferences', {
-          params: {
-            category: 'preference'
-          }
-        })
-        dislikeOptions = apiClient.get('/signup/dislikes', {
-          params: {
-            category: 'dislikes'
-          }
-        })
-      }
     } catch (error) {
       console.error('Getting preferences and dislikes failed:', error.response ? error.response.data : error)
       alert(`Getting preferences and dislikes failed:: ${error.response ? error.response.data.message : 'Network or server error'}`)
